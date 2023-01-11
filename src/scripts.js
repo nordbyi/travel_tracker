@@ -12,12 +12,12 @@ let currentDate = dayjs().format("YYYY/MM/DD");
 fetchAll().then((data) => {
   console.log(data);
   onLoadData(data);
-  updateStartCalendar()
-  updateEndCalendar()
 });
 
 function onLoadData(data) {
   updateSelectOptions(data[2].destinations);
+  updateStartCalendar()
+  updateEndCalendar()
 }
 
 function updateSelectOptions(destinations) {
@@ -33,13 +33,16 @@ function updateStartCalendar() {
   const calendarDate = dayjs(currentDate).format("YYYY-MM-DD");
   if(!tripStartCalendar.value) {
     tripStartCalendar.setAttribute("min", calendarDate);
-    tripStartCalendar.setAttribute("value", calendarDate);
+    tripStartCalendar.value = calendarDate;
   }
 }
 
 function updateEndCalendar() {
   if (!tripEndCalendar.value || dayjs(tripStartCalendar.value).isAfter(dayjs(tripEndCalendar.value))) {
     tripEndCalendar.value = tripStartCalendar.value
+    tripEndCalendar.setAttribute("min", tripStartCalendar.value);
+  }
+  else {
     tripEndCalendar.setAttribute("min", tripStartCalendar.value);
   }
 }
