@@ -8,20 +8,45 @@
   </head>
   <body>
     <img src="./images/turing-logo.png" alt="turing logo" />
-    <nav></nav>
+    <nav class="nav">
+      <p>Logo</p>
+      <p>Amount Spent on trips + Agent fees</p>
+    </nav>
     <main>
       <form>
+        <label for="destinationsInput">Find A Destination: </label>
+        <select name="Destinations" id="destinationsInput">
+          <option value="test">Test</option>
+        </select>
         <label for="tripStart">Choose a Start Date: </label>
-        <input type="date" id="tripStart" />
-        <label for="tripLength"></label>
-        <input type="number" name="duration" min="0" placeholder="Length Of Trip" id="tripLength" class="trip-length"/>
-        <label for="numTravelers"></label>
-        <input type="number" name="travelers" min="1" placeholder="Number of Travelers" id="numTravelers" class="num-travelers"/>
+        <input type="date" id="tripStartInput" />
+        <label for="tripLength">Trip Length</label>
+        <input
+          type="number"
+          name="duration"
+          min="0"
+          placeholder="Length Of Trip"
+          id="tripLengthInput"
+          class="trip-length-input"
+        />
+        <label for="numTravelers">Number of Travelers</label>
+        <input
+          type="number"
+          name="travelers"
+          min="1"
+          placeholder="Number of Travelers"
+          id="numTravelersInput"
+          class="num-travelers-input"
+        />
       </form>
-      <!-- glide thingy -->
-
+      <section>
+        <!-- glide thingy for possible trips-->
+      </section>
+      <section>
+        <!-- past, upcomming, and pending trips -->
+      </section>
     </main>
-    
+
     <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
     <script src="bundle.js"></script>
   </body>
