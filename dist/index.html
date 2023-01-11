@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
-</head>
-<body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webpack Starter Kit</title>
+  </head>
+  <body>
+    <img src="./images/turing-logo.png" alt="turing logo" />
+    <nav></nav>
+    <main>
+      <form>
+        <label for="tripStart">Choose a Start Date: </label>
+        <input type="date" id="tripStart" />
+        <label for="tripLength"></label>
+        <input type="number" name="duration" min="0" placeholder="Length Of Trip" id="tripLength" class="trip-length"/>
+        <label for="numTravelers"></label>
+        <input type="number" name="travelers" min="1" placeholder="Number of Travelers" id="numTravelers" class="num-travelers"/>
+      </form>
+      <!-- glide thingy -->
 
-</body>
+    </main>
+    
+    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+    <script src="bundle.js"></script>
+  </body>
 </html>
