@@ -19,12 +19,15 @@ describe("Traveler", function () {
     expect(traveler).to.be.an.instanceof(Traveler);
   });
 
-  it("Should have an ID", () => {
+  it("Should have an ID property", () => {
     expect(traveler.id).to.equal(1);
   });
 
-  it("Should have a name", () => {
-    expect(traveler.name).to.equal('Ham Leadbeater');
+  it("Should have a name property", () => {
+    expect(traveler.name).to.equal("Ham Leadbeater");
   });
 
+  it("Should have a travelerType property", () => {
+    expect(traveler.travelerType).to.equal("relaxer");
+  });
 });
