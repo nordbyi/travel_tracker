@@ -8,6 +8,7 @@ const tripEndCalendar = document.querySelector("#tripEndInput");
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 
 let currentDate = dayjs().format("YYYY/MM/DD");
+let destinations
 
 fetchAll().then((data) => {
   console.log(data);
@@ -15,7 +16,8 @@ fetchAll().then((data) => {
 });
 
 function onLoadData(data) {
-  updateSelectOptions(data[2].destinations);
+  destinations = data[2].destinations
+  updateSelectOptions(destinations);
   updateStartCalendar()
   updateEndCalendar()
 }
