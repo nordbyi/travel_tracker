@@ -1,8 +1,17 @@
-import chai from 'chai';
-const expect = chai.expect;
+import { expect } from "chai";
 
-describe('See if the tests are running', function() {
+import Traveler from '../src/Traveler'
+
+import travelerData from '../src/data/traveler-data'
+
+describe('Traveler', function() {
+  let traveler;
+
+  beforeEach(() => {
+    traveler = new Traveler();
+  });
+
   it('should return true', function() {
-    expect(true).to.equal(true);
+    expect(traveler).to.be.an.instanceof(Traveler);
   });
 });
