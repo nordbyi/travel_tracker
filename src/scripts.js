@@ -5,10 +5,13 @@ const selectInput = document.querySelector("#destinationsInput");
 const tripStartCalendar = document.querySelector("#tripStartInput");
 const tripEndCalendar = document.querySelector("#tripEndInput");
 
+let currentDate = dayjs().format('YYYY/MM/DD')
+console.log(currentDate)
 
 fetchAll().then((data) => {
   console.log(data);
   onLoadData(data);
+  updateCalendars()
 });
 
 function onLoadData(data) {
@@ -25,3 +28,11 @@ function updateSelectOptions(destinations) {
     });
 }
 
+function updateCalendars() {
+  const calendarDate = dayjs(currentDate).format('YYYY-MM-DD')
+  console.log(tripStartCalendar)
+  tripStartCalendar.setAttribute('min', calendarDate)
+  tripStartCalendar.setAttribute('value', calendarDate)
+  tripEndCalendar.setAttribute('min', tripStartCalendar.value)
+  tripEndCalendar.setAttribute('value', tripStartCalendar.value)
+}
