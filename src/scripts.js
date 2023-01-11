@@ -13,7 +13,7 @@ function onLoadData(data) {
 
 function updateSelectOptions(destinations) {
   selectInput.innerHTML = ''
-  destinations.forEach(destination => {
+  destinations.sort((a, b) => a.destination.localeCompare(b.destination)).forEach(destination => {
     console.log(destination)
     selectInput.innerHTML += `<option value=${destination.destination}>${destination.destination}</option>`
   });
