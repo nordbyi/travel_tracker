@@ -1,11 +1,50 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
+import { fetchAll } from "./apiCalls";
+import * as dayjs from "dayjs";
 
-// An example of how you tell webpack to use a CSS (SCSS) file
-import './css/styles.css';
+const selectInput = document.querySelector("#destinationsInput");
+const tripStartCalendar = document.querySelector("#tripStartInput");
+const tripEndCalendar = document.querySelector("#tripEndInput");
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+tripStartCalendar.addEventListener("change", updateEndCalendar);
 
+let currentDate = dayjs().format("YYYY/MM/DD");
+let destinations
 
-console.log('This is the JavaScript entry file - your code begins here.');
+fetchAll().then((data) => {
+  console.log(data);
+  onLoadData(data);
+});
+
+function onLoadData(data) {
+  destinations = data[2].destinations
+  updateSelectOptions(destinations);
+  updateStartCalendar()
+  updateEndCalendar()
+}
+
+function updateSelectOptions(destinations) {
+  selectInput.innerHTML = "";
+  destinations
+    .sort((a, b) => a.destination.localeCompare(b.destination))
+    .forEach((destination) => {
+      selectInput.innerHTML += `<option value=${destination.destination}>${destination.destination}</option>`;
+    });
+}
+
+function updateStartCalendar() {
+  const calendarDate = dayjs(currentDate).format("YYYY-MM-DD");
+  if(!tripStartCalendar.value) {
+    tripStartCalendar.setAttribute("min", calendarDate);
+    tripStartCalendar.value = calendarDate;
+  }
+}
+
+function updateEndCalendar() {
+  if (!tripEndCalendar.value || dayjs(tripStartCalendar.value).isAfter(dayjs(tripEndCalendar.value))) {
+    tripEndCalendar.value = tripStartCalendar.value
+    tripEndCalendar.setAttribute("min", tripStartCalendar.value);
+  }
+  else {
+    tripEndCalendar.setAttribute("min", tripStartCalendar.value);
+  }
+}
