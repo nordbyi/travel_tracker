@@ -10,13 +10,8 @@ describe("Traveler", function () {
   beforeEach(() => {
     traveler = new Traveler({
       id: 1,
-      userID: 35,
-      destinationID: 25,
-      travelers: 5,
-      date: "2022/10/04",
-      duration: 18,
-      status: "approved",
-      suggestedActivities: [],
+      name: "Ham Leadbeater",
+      travelerType: "relaxer",
     });
   });
 
@@ -27,4 +22,9 @@ describe("Traveler", function () {
   it("Should have an ID", () => {
     expect(traveler.id).to.equal(1);
   });
+
+  it("Should have a name", () => {
+    expect(traveler.name).to.equal('Ham Leadbeater');
+  });
+
 });
