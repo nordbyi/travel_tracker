@@ -1,5 +1,5 @@
 import Glide from '@glidejs/glide'
 
-const mainGlide = new Glide()
+const mainGlide = () => new Glide('.glide').mount()
 
 export {mainGlide}
