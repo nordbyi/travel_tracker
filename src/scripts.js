@@ -14,15 +14,25 @@ const tripEndCalendar = document.querySelector("#tripEndInput");
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 
 let currentDate = dayjs().format("YYYY/MM/DD");
+let travelers
+let trips
 let destinations
+let user
 
 fetchAll().then((data) => {
   console.log(data);
   onLoadData(data);
+  renderDOM()
 });
 
 function onLoadData(data) {
+  travelers = data[0].travelers
+  trips = data[1].trips
   destinations = data[2].destinations
+  // user = travelers.findTraveler(id) // make sure method can find a traveler by name or id 
+}
+
+function renderDOM() {
   updateSelectOptions(destinations);
   updateStartCalendar()
   updateEndCalendar()
