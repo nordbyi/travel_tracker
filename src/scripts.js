@@ -20,6 +20,7 @@ let trips
 let destinations
 let user
 
+// change fetch all argument to login page traveler id
 fetchAll(1).then((data) => {
   console.log(data);
   onLoadData(data);
