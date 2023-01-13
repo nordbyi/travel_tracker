@@ -2,8 +2,6 @@ import { expect } from "chai";
 
 import User from "../src/User";
 
-import travelerData from "../src/data/traveler-data";
-
 describe("Traveler", function () {
   let user;
 
@@ -11,7 +9,6 @@ describe("Traveler", function () {
     user = new User({
       id: 1,
       name: "Ham Leadbeater",
-      travelerType: "relaxer",
     });
   });
 
