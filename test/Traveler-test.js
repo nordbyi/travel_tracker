@@ -27,6 +27,10 @@ describe("Traveler", function () {
     expect(traveler._name).to.equal("Ham Leadbeater");
   });
 
+  it("Should be able to return it's id", () => {
+    expect(traveler.id).to.equal(1)
+  });
+
   it("Should be able to return it's name", () => {
     expect(traveler.name).to.equal("Ham Leadbeater")
   });
