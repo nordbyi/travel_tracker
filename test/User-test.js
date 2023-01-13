@@ -13,7 +13,7 @@ describe("Traveler", function () {
   });
 
   it("should be an instanc of User", () => {
-    expect(user).to.be.an.instanceof(user);
+    expect(user).to.be.an.instanceof(User);
   });
 
   it("Should have an ID property", () => {
