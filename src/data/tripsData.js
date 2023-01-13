@@ -1,4 +1,4 @@
-const travelerData = [
+const tripsData = [
   {
     id: 1,
     userID: 35,
@@ -191,4 +191,4 @@ const travelerData = [
   },
 ];
 
-export { travelerData };
+export { tripsData };
