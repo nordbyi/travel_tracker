@@ -17,4 +17,8 @@ describe("Traveler", function () {
   it("should have an array of trips", () => {
     expect(trips.trips).to.deep.equal(tripsData);
   });
+
+  it("should have an array of destinations", () => {
+    expect(trips.trips).to.deep.equal(destinationsData);
+  });
 });
