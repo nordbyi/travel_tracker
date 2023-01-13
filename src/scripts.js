@@ -1,11 +1,15 @@
+import "swiper/css"
+import "swiper/css/effect-coverflow"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
+import "./css/styles.css";
 import { fetchAll } from "./apiCalls";
 import * as dayjs from "dayjs";
-import { swiper } from "./swiper";
+import { swiper, insertSlides } from "./swiper";
 
 const selectInput = document.querySelector("#destinationsInput");
 const tripStartCalendar = document.querySelector("#tripStartInput");
 const tripEndCalendar = document.querySelector("#tripEndInput");
-const swiperSlideContainer = document.querySelector("#swiperContainer")
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 
@@ -22,6 +26,7 @@ function onLoadData(data) {
   updateSelectOptions(destinations);
   updateStartCalendar()
   updateEndCalendar()
+  insertSlides(destinations)
   swiper()
 }
 
