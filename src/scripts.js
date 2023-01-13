@@ -6,6 +6,7 @@ import "./css/styles.css";
 import { fetchAll } from "./apiCalls";
 import * as dayjs from "dayjs";
 import { swiper, insertSlides } from "./swiper";
+import User from "./User";
 
 const selectInput = document.querySelector("#destinationsInput");
 const tripStartCalendar = document.querySelector("#tripStartInput");
@@ -19,7 +20,7 @@ let trips
 let destinations
 let user
 
-fetchAll().then((data) => {
+fetchAll(1).then((data) => {
   console.log(data);
   onLoadData(data);
   renderDOM()
@@ -29,7 +30,7 @@ function onLoadData(data) {
   travelers = data[0].travelers
   trips = data[1].trips
   destinations = data[2].destinations
-  // user = travelers.findTraveler(id) // make sure method can find a traveler by name or id 
+  user = new User(data[3])
 }
 
 function renderDOM() {
