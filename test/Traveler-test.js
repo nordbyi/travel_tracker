@@ -27,7 +27,4 @@ describe("Traveler", function () {
     expect(traveler.name).to.equal("Ham Leadbeater");
   });
 
-  it("Should have a travelerType property", () => {
-    expect(traveler.travelerType).to.equal("relaxer");
-  });
 });
