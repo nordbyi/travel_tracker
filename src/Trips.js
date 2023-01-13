@@ -1,5 +1,7 @@
 class Trips {
-  constructor() {}
+  constructor(tripsData, DestinationsData) {
+    this.trips = tripsData
+  }
 }
 
 export default Trips
