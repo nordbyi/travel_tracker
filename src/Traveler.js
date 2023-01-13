@@ -1,7 +1,11 @@
 class Traveler {
   constructor(traveler) {
-    this.id = traveler.id
-    this.name = traveler.name
+    this._id = traveler.id
+    this._name = traveler.name
+  }
+
+  get name() {
+    return this._name
   }
 }
 
