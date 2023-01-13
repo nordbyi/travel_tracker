@@ -1,14 +1,14 @@
 import { expect } from "chai";
 
-import Traveler from "../src/Traveler";
+import User from "../src/User";
 
 import travelerData from "../src/data/traveler-data";
 
 describe("Traveler", function () {
-  let traveler;
+  let user;
 
   beforeEach(() => {
-    traveler = new Traveler({
+    user = new User({
       id: 1,
       name: "Ham Leadbeater",
       travelerType: "relaxer",
@@ -16,22 +16,22 @@ describe("Traveler", function () {
   });
 
   it("should return true", () => {
-    expect(traveler).to.be.an.instanceof(Traveler);
+    expect(user).to.be.an.instanceof(user);
   });
 
   it("Should have an ID property", () => {
-    expect(traveler._id).to.equal(1);
+    expect(user._id).to.equal(1);
   });
 
   it("Should have a name property", () => {
-    expect(traveler._name).to.equal("Ham Leadbeater");
+    expect(user._name).to.equal("Ham Leadbeater");
   });
 
   it("Should be able to return it's id", () => {
-    expect(traveler.id).to.equal(1)
+    expect(user.id).to.equal(1);
   });
 
   it("Should be able to return it's name", () => {
-    expect(traveler.name).to.equal("Ham Leadbeater")
+    expect(user.name).to.equal("Ham Leadbeater");
   });
 });
