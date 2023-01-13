@@ -13,4 +13,8 @@ describe("Traveler", function () {
   it("should be an instance of Trips", () => {
     expect(trips).to.be.an.instanceof(Trips);
   });
+
+  it("should have an array of trips", () => {
+    expect(trips.trips).to.deep.equal(tripsData);
+  });
 });
