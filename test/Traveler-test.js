@@ -20,11 +20,14 @@ describe("Traveler", function () {
   });
 
   it("Should have an ID property", () => {
-    expect(traveler.id).to.equal(1);
+    expect(traveler._id).to.equal(1);
   });
 
   it("Should have a name property", () => {
-    expect(traveler.name).to.equal("Ham Leadbeater");
+    expect(traveler._name).to.equal("Ham Leadbeater");
   });
 
+  it("Should be able to return it's name", () => {
+    expect(traveler.name).to.equal("Ham Leadbeater")
+  });
 });
