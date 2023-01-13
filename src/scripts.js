@@ -1,9 +1,11 @@
 import { fetchAll } from "./apiCalls";
 import * as dayjs from "dayjs";
+import { swiper } from "./swiper";
 
 const selectInput = document.querySelector("#destinationsInput");
 const tripStartCalendar = document.querySelector("#tripStartInput");
 const tripEndCalendar = document.querySelector("#tripEndInput");
+const swiperSlideContainer = document.querySelector("#swiperContainer")
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 
@@ -20,6 +22,7 @@ function onLoadData(data) {
   updateSelectOptions(destinations);
   updateStartCalendar()
   updateEndCalendar()
+  swiper()
 }
 
 function updateSelectOptions(destinations) {
