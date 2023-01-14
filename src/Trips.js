@@ -1,5 +1,5 @@
 class Trips {
-  constructor(tripsData, DestinationsData) {
+  constructor(tripsData, destinationsData) {
     this.trips = tripsData
   }
 }
