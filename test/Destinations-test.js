@@ -38,8 +38,8 @@ describe("Destination", function () {
     });
   });
 
-  it("Should be able to find a destination by name", () => {
-    expect(destinations.findByQuery("Tokyo, Japan")).to.deep.equal({
+  it("Should be able to find a destination by destination name", () => {
+    expect(destinations.findByQuery('destination', "Tokyo, Japan")).to.deep.equal({
       id: 8,
       destination: "Tokyo, Japan",
       estimatedLodgingCostPerDay: 125,
@@ -47,6 +47,15 @@ describe("Destination", function () {
       image:
         "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1971&q=80",
       alt: "city with people walking in crosswalk and brightly lit shops at night",
+    });
+    expect(destinations.findByQuery('destination', "Paris, France")).to.deep.equal({
+      id: 7,
+      destination: "Paris, France",
+      estimatedLodgingCostPerDay: 100,
+      estimatedFlightCostPerPerson: 395,
+      image:
+        "https://images.unsplash.com/photo-1524396309943-e03f5249f002?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80",
+      alt: "city during the day time with eiffel tower",
     });
   });
 
@@ -58,5 +67,15 @@ describe("Destination", function () {
     expect(destinations.findByQuery("id", null)).to.be.undefined;
     expect(destinations.findByQuery("id", undefined)).to.be.undefined;
     expect(destinations.findByQuery("id", "Tokyo, Japan")).to.be.undefined;
+  });
+
+  it("Should return undefined if no destination has destination name", () => {
+    expect(destinations.findByQuery("destination", 100)).to.be.undefined;
+    expect(destinations.findByQuery("destination", 51)).to.be.undefined;
+    expect(destinations.findByQuery("destination", "50")).to.be.undefined;
+    expect(destinations.findByQuery("destination", true)).to.be.undefined;
+    expect(destinations.findByQuery("destination", null)).to.be.undefined;
+    expect(destinations.findByQuery("destination", undefined)).to.be.undefined;
+    expect(destinations.findByQuery("destination", "Washington DC, USA")).to.be.undefined;
   });
 });
