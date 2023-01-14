@@ -2,7 +2,7 @@ import { expect } from "chai";
 import Destinations from "../src/Destinations";
 import { destinationsData } from "../src/data/destinationsData";
 
-describe("Traveler", function () {
+describe("Destination", function () {
   let destinations;
 
   beforeEach(() => {
@@ -36,5 +36,9 @@ describe("Traveler", function () {
         "https://images.unsplash.com/photo-1543785734-4b6e564642f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
       alt: "city with clear skys and a road in the day time",
     });
+  });
+
+  it("Should return undefined if no destination found", () => {
+    expect(destinations.findByID(100)).to.be.undefined;
   });
 });
