@@ -27,5 +27,14 @@ describe("Traveler", function () {
         "https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
       alt: "overview of city buildings with a clear sky",
     });
+    expect(destinations.findByID(5)).to.deep.equal({
+      id: 5,
+      destination: "Madrid, Spain",
+      estimatedLodgingCostPerDay: 150,
+      estimatedFlightCostPerPerson: 650,
+      image:
+        "https://images.unsplash.com/photo-1543785734-4b6e564642f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+      alt: "city with clear skys and a road in the day time",
+    });
   });
 });
