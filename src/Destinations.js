@@ -1,11 +1,21 @@
 class Destinations {
   constructor(data) {
-    this.destinations = data
+    this.destinations = data;
   }
 
-  findByID(id) {
-    return this.destinations.find(el => el.id === id)
+  findByQuery(query, comparison) {
+    return this.destinations.find(
+      (destination) => destination[query] === comparison
+    );
+  }
+
+  filterByQuery(query, comparisonArray) {
+    return this.destinations.filter((destination) =>
+      comparisonArray.some(
+        (comparison) => comparison === destination[query]
+      )
+    );
   }
 }
 
-export default Destinations
+export default Destinations;
