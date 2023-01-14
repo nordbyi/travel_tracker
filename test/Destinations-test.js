@@ -18,7 +18,7 @@ describe("Destination", function () {
   });
 
   it("Should be able to find a destination by ID", () => {
-    expect(destinations.findByID(1)).to.deep.equal({
+    expect(destinations.findByQuery('id', 1)).to.deep.equal({
       id: 1,
       destination: "Lima, Peru",
       estimatedLodgingCostPerDay: 70,
@@ -27,7 +27,7 @@ describe("Destination", function () {
         "https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
       alt: "overview of city buildings with a clear sky",
     });
-    expect(destinations.findByID(5)).to.deep.equal({
+    expect(destinations.findByQuery('id', 5)).to.deep.equal({
       id: 5,
       destination: "Madrid, Spain",
       estimatedLodgingCostPerDay: 150,
@@ -38,12 +38,15 @@ describe("Destination", function () {
     });
   });
 
-  it("Should return undefined if no destination found by ID", () => {
-    expect(destinations.findByID(100)).to.be.undefined;
-    expect(destinations.findByID(51)).to.be.undefined;
-    expect(destinations.findByID('50')).to.be.undefined;
-    expect(destinations.findByID(true)).to.be.undefined;
-    expect(destinations.findByID(null)).to.be.undefined;
-    expect(destinations.findByID(undefined)).to.be.undefined;
+
+
+  it("Should return undefined if no destination has id", () => {
+    expect(destinations.findByQuery("id", 100)).to.be.undefined;
+    expect(destinations.findByQuery("id", 51)).to.be.undefined;
+    expect(destinations.findByQuery("id", "50")).to.be.undefined;
+    expect(destinations.findByQuery("id", true)).to.be.undefined;
+    expect(destinations.findByQuery("id", null)).to.be.undefined;
+    expect(destinations.findByQuery("id", undefined)).to.be.undefined;
+    expect(destinations.findByQuery("id", "Tokyo, Japan")).to.be.undefined;
   });
 });
