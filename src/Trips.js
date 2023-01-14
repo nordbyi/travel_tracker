@@ -1,6 +1,6 @@
 class Trips {
-  constructor(tripsData, destinationsData) {
-    this.trips = tripsData
+  constructor(data) {
+    this.trips = data
   }
 }
 
