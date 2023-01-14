@@ -38,7 +38,12 @@ describe("Destination", function () {
     });
   });
 
-  it("Should return undefined if no destination found", () => {
+  it("Should return undefined if no destination found by ID", () => {
     expect(destinations.findByID(100)).to.be.undefined;
+    expect(destinations.findByID(51)).to.be.undefined;
+    expect(destinations.findByID('50')).to.be.undefined;
+    expect(destinations.findByID(true)).to.be.undefined;
+    expect(destinations.findByID(null)).to.be.undefined;
+    expect(destinations.findByID(undefined)).to.be.undefined;
   });
 });
