@@ -116,9 +116,41 @@ describe("Destination", function () {
     ]);
   });
 
+  it("Should be able find an array of destinations from an array of destination names", () => {
+    expect(destinations.filterByQuery("destination", [ "Cartagena, Colombia", "Stockholm, Sweden", "Sydney, Austrailia"])).to.deep.equal([
+      {
+        id: 2,
+        destination: "Stockholm, Sweden",
+        estimatedLodgingCostPerDay: 100,
+        estimatedFlightCostPerPerson: 780,
+        image:
+          "https://images.unsplash.com/photo-1560089168-6516081f5bf1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        alt: "city with boats on the water during the day time",
+      },
+      {
+        id: 3,
+        destination: "Sydney, Austrailia",
+        estimatedLodgingCostPerDay: 130,
+        estimatedFlightCostPerPerson: 950,
+        image:
+          "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+        alt: "opera house and city buildings on the water with boats",
+      },
+      {
+        id: 4,
+        destination: "Cartagena, Colombia",
+        estimatedLodgingCostPerDay: 65,
+        estimatedFlightCostPerPerson: 350,
+        image:
+          "https://images.unsplash.com/photo-1558029697-a7ed1a4b94c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+        alt: "boats at a dock during the day time",
+      },
+    ]);
+  });
+
   it("Should return an empty array if no destinations match ids", () => {
     expect(destinations.filterByQuery("id", [20, 30, 40, 0])).to.deep.equal([])
   })
 
-  
+
 });
