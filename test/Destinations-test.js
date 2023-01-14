@@ -115,4 +115,10 @@ describe("Destination", function () {
       },
     ]);
   });
+
+  it("Should return an empty array if no destinations match ids", () => {
+    expect(destinations.filterByQuery("id", [20, 30, 40, 0])).to.deep.equal([])
+  })
+
+  
 });
