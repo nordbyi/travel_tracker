@@ -39,4 +39,15 @@ describe("Trips", function () {
       suggestedActivities: [],
     });
   });
+
+  it("Should return undefined if no id found", () => {
+    expect(trips.findTripByID(3)).to.be.undefined
+    expect(trips.findTripByID(50)).to.be.undefined
+    expect(trips.findTripByID('1')).to.be.undefined
+    expect(trips.findTripByID(null)).to.be.undefined
+    expect(trips.findTripByID(undefined)).to.be.undefined
+    expect(trips.findTripByID(true)).to.be.undefined
+    expect(trips.findTripByID(false)).to.be.undefined
+    expect(trips.findTripByID([])).to.be.undefined
+  })
 });
