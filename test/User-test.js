@@ -108,4 +108,8 @@ describe("Traveler", function () {
       user.upcomingTrips(trips.filterByQuery("userID", 42), currentDate)
     ).to.deep.equal([]);
   });
+
+  it("Should be able to calculate it's non-pending travel expeneses for THIS year (plus 10% agent fees)", () => {
+    expect(user.CalculateExpensesForYear(trips, currentDate, 'approved')).to.equal()
+  })
 });
