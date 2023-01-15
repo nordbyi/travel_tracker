@@ -21,6 +21,10 @@ class User {
   pendingTrips(trips) {
     return trips.filter(trip => trip.status === 'pending')
   }
+
+  upcomingTrips(trips, date) {
+    return trips.filter(trip => dayjs(trip.date).isAfter(dayjs(date)) && trip.status === 'approved')
+  }
 }
 
 export default User
