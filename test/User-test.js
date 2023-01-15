@@ -77,6 +77,26 @@ describe("User", function () {
         status: "pending",
         suggestedActivities: [],
       },
+      {
+        id: 31,
+        userID: 1,
+        destinationID: 6,
+        travelers: 1,
+        date: "2022/05/14",
+        duration: 1,
+        status: "pending",
+        suggestedActivities: [],
+      },
+      {
+        id: 31,
+        userID: 1,
+        destinationID: 4,
+        travelers: 1,
+        date: "2022/09/14",
+        duration: 1,
+        status: "pending",
+        suggestedActivities: [],
+      },
     ]);
   });
 
@@ -134,7 +154,11 @@ describe("User", function () {
     expect(user.calculateTripCost(tripsData[2], destinations.findByQuery('id', 7))).to.equal("Trip.destinationID and destination.id Don\'t match")
   })
 
-  it("Should be able to calculate it's non-pending travel expeneses for THIS year (plus 10% agent fees)", () => {
+  it("Should be able to calculate it's non-pending travel expeneses for the current year (plus 10% agent fees)", () => {
     expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, 'approved', destinations)).to.equal(5005)
+  })
+
+  it("Should be able to calculate it's pending travel expeneses for the current year (plus 10% agent fees)", () => {
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, 'pending', destinations)).to.equal(1513)
   })
 });
