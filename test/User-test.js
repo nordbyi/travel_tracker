@@ -43,7 +43,9 @@ describe("Traveler", function () {
   });
 
   it("Should return it's past trips", () => {
-    expect(user.pastTrips(trips.filterByQuery('userID', 1), currentDate)).to.deep.equal([
+    expect(
+      user.pastTrips(trips.filterByQuery("userID", 1), currentDate)
+    ).to.deep.equal([
       {
         id: 2,
         userID: 1,
@@ -58,23 +60,46 @@ describe("Traveler", function () {
   });
 
   it("Should return an empty array if no past trips exist", () => {
-    expect(user.pastTrips(trips.filterByQuery('userID', 1), '2000/01/01')).to.deep.equal([])
-  })
+    expect(
+      user.pastTrips(trips.filterByQuery("userID", 1), "2000/01/01")
+    ).to.deep.equal([]);
+  });
 
   it("Should return it's pending trips", () => {
-    expect(user.pendingTrips(trips.filterByQuery('userID', 1))).to.deep.equal([{
-      id: 14,
-      userID: 1,
-      destinationID: 35,
-      travelers: 1,
-      date: "2023/09/24",
-      duration: 10,
-      status: "pending",
-      suggestedActivities: [],
-    },])
-  })
+    expect(user.pendingTrips(trips.filterByQuery("userID", 1))).to.deep.equal([
+      {
+        id: 14,
+        userID: 1,
+        destinationID: 35,
+        travelers: 1,
+        date: "2023/09/24",
+        duration: 10,
+        status: "pending",
+        suggestedActivities: [],
+      },
+    ]);
+  });
 
   it("Should return an empty array if no pending trips exist", () => {
-    expect(user.pendingTrips(trips.filterByQuery('userID', 2), '2000/01/01')).to.deep.equal([])
-  })
+    expect(
+      user.pendingTrips(trips.filterByQuery("userID", 2), "2000/01/01")
+    ).to.deep.equal([]);
+  });
+
+  it("Should return it's upcoming, approved trips", () => {
+    expect(
+      user.upcomingTrips(trips.filterByQuery("userID", 1), currentDate)
+    ).to.deep.equal([
+      {
+        id: 11,
+        userID: 1,
+        destinationID: 5,
+        travelers: 4,
+        date: "2022/10/14",
+        duration: 4,
+        status: "approved",
+        suggestedActivities: [],
+      },
+    ]);
+  });
 });
