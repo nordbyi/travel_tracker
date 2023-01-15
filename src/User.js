@@ -47,6 +47,7 @@ class User {
   //   }, 0)
   // }
   calculateExpensesForYear(trips, currentDate, destinations) {
+    if(!trips || !currentDate || !destinations) return 'Please include trips array, currentDate, and destination class instance'
     return trips.reduce((expenses, trip) => {
       const dayObj = dayjs(currentDate)
       if(!dayjs(trip.date).isBetween(dayObj.startOf('year'), dayObj.endOf('year'))) {
