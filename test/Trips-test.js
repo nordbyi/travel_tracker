@@ -1,13 +1,12 @@
 import { expect } from "chai";
 import Trips from "../src/Trips";
 import { tripsData } from "../src/data/tripsData";
-import { destinationsData } from "../src/data/destinationsData";
 
-describe("Traveler", function () {
+describe("Trips", function () {
   let trips;
 
   beforeEach(() => {
-    trips = new Trips(tripsData, destinationsData);
+    trips = new Trips(tripsData);
   });
 
   it("should be an instance of Trips", () => {
