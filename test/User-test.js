@@ -162,10 +162,15 @@ describe("User", function () {
     expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, destinations).pending).to.equal(1513)
   })
 
+  it("Should return an object with values of 0 if no expenses found for the current year", () => {
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 7), currentDate, destinations)).to.deep.equal({approved: 0, pending: 0})
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 29), currentDate, destinations)).to.deep.equal({approved: 0, pending: 0})
+  })
+
   it("Should return a message if no trips, currentDate, or destination class instance given", () => {
-    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate).approved).to.equal('Please include trips array, currentDate, and destination class instance')
-    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), destinations).approved).to.equal('Please include trips array, currentDate, and destination class instance')
-    expect(user.calculateExpensesForYear(currentDate, destinations).approved).to.equal('Please include trips array, currentDate, and destination class instance')
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate)).to.equal('Please include trips array, currentDate, and destination class instance')
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), destinations)).to.equal('Please include trips array, currentDate, and destination class instance')
+    expect(user.calculateExpensesForYear(currentDate, destinations)).to.equal('Please include trips array, currentDate, and destination class instance')
     expect(user.calculateExpensesForYear()).to.equal('Please include trips array, currentDate, and destination class instance')
   })  
 });
