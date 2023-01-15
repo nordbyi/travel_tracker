@@ -102,4 +102,10 @@ describe("Traveler", function () {
       },
     ]);
   });
+
+  it("Should return an empty array if no upcoming, approved trips exist", () => {
+    expect(
+      user.upcomingTrips(trips.filterByQuery("userID", 42), currentDate)
+    ).to.deep.equal([]);
+  });
 });
