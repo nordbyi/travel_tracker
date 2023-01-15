@@ -161,4 +161,11 @@ describe("User", function () {
   it("Should be able to calculate it's pending travel expeneses for the current year (plus 10% agent fees)", () => {
     expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, destinations).pending).to.equal(1513)
   })
+
+  it("Should return a message if no trips, currentDate, or destination class instance given", () => {
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate).approved).to.equal('Please include trips array, currentDate, and destination class instance')
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), destinations).approved).to.equal('Please include trips array, currentDate, and destination class instance')
+    expect(user.calculateExpensesForYear(currentDate, destinations).approved).to.equal('Please include trips array, currentDate, and destination class instance')
+    expect(user.calculateExpensesForYear()).to.equal('Please include trips array, currentDate, and destination class instance')
+  })  
 });
