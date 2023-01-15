@@ -155,10 +155,10 @@ describe("User", function () {
   })
 
   it("Should be able to calculate it's non-pending travel expeneses for the current year (plus 10% agent fees)", () => {
-    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, 'approved', destinations)).to.equal(5005)
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, destinations).approved).to.equal(5005)
   })
 
   it("Should be able to calculate it's pending travel expeneses for the current year (plus 10% agent fees)", () => {
-    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, 'pending', destinations)).to.equal(1513)
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, destinations).pending).to.equal(1513)
   })
 });
