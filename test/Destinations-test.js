@@ -2,7 +2,7 @@ import { expect } from "chai";
 import Destinations from "../src/Destinations";
 import { destinationsData } from "../src/data/destinationsData";
 
-describe("Destination", function () {
+describe("Destinations", function () {
   let destinations;
 
   beforeEach(() => {
