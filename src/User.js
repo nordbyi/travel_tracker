@@ -30,18 +30,18 @@ class User {
 
   calculateTripCost(trip, destination) {
     if(!trip || !destination) return 'Please include both a trip and destination'
-    if(trip.destinationID !== destination.id) return "Trip.destinationID and destination.Id Don\'t match"
+    if(trip.destinationID !== destination.id) return "Trip.destinationID and destination.id Don\'t match"
     const flightCost = trip.travelers * destination.estimatedFlightCostPerPerson
     const lodgingCost = trip.duration * destination.estimatedLodgingCostPerDay
     return +((flightCost + lodgingCost) * 1.1).toFixed()
   }
 
-  calculateExpensesForYear(trips, currentDate, status) {
+  calculateExpensesForYear(trips, currentDate, status, destinations) {
     return trips.reduce((expenses, trip) => {
       const dayObj = dayjs(currentDate)
       if(trip.status === status && dayjs(trip.date).isBetween(dayObj.startOf('year'), dayObj.endOf('year'))) {
-        return expenses + 1
-        // make calculateTripExpense method and call on line above instead of 1
+        const tripDestination = destinations.findByQuery('id', trip.destinationID)
+        return expenses + this.calculateTripCost(trip, tripDestination)
       }
       return expenses
     }, 0)
