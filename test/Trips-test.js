@@ -54,16 +54,6 @@ describe("Trips", function () {
   it("Should be able to find all trips for a user ID", () => {
     expect(trips.filterByQuery("userID", 50)).to.deep.equal([
       {
-        id: 11,
-        userID: 1,
-        destinationID: 5,
-        travelers: 4,
-        date: "2022/10/14",
-        duration: 4,
-        status: "approved",
-        suggestedActivities: [],
-      },
-      {
         id: 15,
         userID: 50,
         destinationID: 13,
@@ -127,7 +117,7 @@ describe("Trips", function () {
         userID: 1 ,
         destinationID: 35,
         travelers: 1,
-        date: "2022/09/24",
+        date: "2023/09/24",
         duration: 10,
         status: "pending",
         suggestedActivities: [],
@@ -161,7 +151,7 @@ describe("Trips", function () {
         userID: 1,
         destinationID: 35,
         travelers: 1,
-        date: "2022/09/24",
+        date: "2023/09/24",
         duration: 10,
         status: "pending",
         suggestedActivities: [],
@@ -183,7 +173,7 @@ describe("Trips", function () {
         userID: 1,
         destinationID: 22,
         travelers: 4,
-        date: "2022/05/22",
+        date: "2021/05/22",
         duration: 17,
         status: "approved",
         suggestedActivities: [],
