@@ -134,5 +134,13 @@ describe("Trips", function () {
       },
     ]);
   });
-  
+
+  it("Should return an empty array if no trips match ID", () => {
+    expect(trips.filterByQuery("destinationID", 100)).to.deep.equal([]);
+    expect(trips.filterByQuery("destinationID", "35")).to.deep.equal([]);
+    expect(trips.filterByQuery("destinationID", "18")).to.deep.equal([]);
+    expect(trips.filterByQuery("destinationID", null)).to.deep.equal([]);
+    expect(trips.filterByQuery("destinationID", undefined)).to.deep.equal([]);
+    expect(trips.filterByQuery("destinationID", false)).to.deep.equal([]);
+  });
 });
