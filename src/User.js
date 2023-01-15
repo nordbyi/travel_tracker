@@ -1,3 +1,5 @@
+import * as dayjs from "dayjs";
+
 class User {
   constructor(user) {
     this._id = user.id
@@ -10,6 +12,10 @@ class User {
 
   get name() {
     return this._name
+  }
+
+  pastTrips(trips, date) {
+    return trips.filter(trip => dayjs(trip.date).isBefore(dayjs(date)))
   }
 }
 
