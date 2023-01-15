@@ -28,5 +28,15 @@ describe("Trips", function () {
       status: "approved",
       suggestedActivities: [],
     });
+    expect(trips.findTripByID(5)).to.deep.equal({
+      id: 5,
+      userID: 42,
+      destinationID: 29,
+      travelers: 3,
+      date: "2021/04/30",
+      duration: 18,
+      status: "approved",
+      suggestedActivities: [],
+    });
   });
 });
