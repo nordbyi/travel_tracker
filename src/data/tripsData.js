@@ -101,6 +101,16 @@ const tripsData = [
     status: "approved",
     suggestedActivities: [],
   },
+  {
+    id: 30,
+    userID: 1,
+    destinationID: 9,
+    travelers: 1,
+    date: "2022/05/14",
+    duration: 4,
+    status: "approved",
+    suggestedActivities: [],
+  },
 ];
 
 export { tripsData };
