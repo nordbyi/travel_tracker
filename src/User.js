@@ -29,6 +29,7 @@ class User {
   }
 
   calculateTripCost(trip, destination) {
+    if(!trip || !destination) return 'Please include both a trip and destination'
     const flightCost = trip.travelers * destination.estimatedFlightCostPerPerson
     const lodgingCost = trip.duration * destination.estimatedLodgingCostPerDay
     return +((flightCost + lodgingCost) * 1.1).toFixed()
