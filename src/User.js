@@ -1,4 +1,6 @@
 import * as dayjs from "dayjs";
+import isBetween from 'dayjs/plugin/isBetween'
+dayjs.extend(isBetween)
 
 class User {
   constructor(user) {
@@ -24,6 +26,17 @@ class User {
 
   upcomingTrips(trips, date) {
     return trips.filter(trip => dayjs(trip.date).isAfter(dayjs(date)) && trip.status === 'approved')
+  }
+
+  CalculateExpensesForYear(trips, currentDate, status) {
+    return trips.reduce((expenses, trip) => {
+      const dayObj = dayjs(currentDate)
+      if(trip.status === status && dayjs(trip.date).isBetween(dayObj.startOf('year'), dayObj.endOf('year'))) {
+        return expenses + 1
+        // make calculateTripExpense method and call on line above instead of 1
+      }
+      return expenses
+    }, 0)
   }
 }
 
