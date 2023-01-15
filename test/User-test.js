@@ -112,7 +112,10 @@ describe("Traveler", function () {
   it("Should be able to calulate the cost of a trip", () => {
     expect(user.calculateTripCost(tripsData[5], destinations.findByQuery('id', tripsData[5].destinationID))).to.equal(3520)
     expect(user.calculateTripCost(tripsData[9], destinations.findByQuery('id', tripsData[9].destinationID))).to.equal(3586)
+  })
 
+  it("Should return a message if no trip or destination given", () => {
+    expect(user.calculateTripCost(tripsData[5])).to.equal('Please include both a trip and destination')
   })
 
   it("Should be able to calculate it's non-pending travel expeneses for THIS year (plus 10% agent fees)", () => {
