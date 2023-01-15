@@ -110,20 +110,12 @@ describe("Traveler", function () {
   });
 
   it("Should be able to calulate the cost of a trip", () => {
-    let testTrip = {
-      id: 11,
-      userID: 1,
-      destinationID: 5,
-      travelers: 4,
-      date: "2022/10/14",
-      duration: 4,
-      status: "approved",
-      suggestedActivities: [],
-    }
-    expect(user.calculateTripCost(testTrip, destinations.findByQuery('id', testTrip.destinationID))).to.equal(3520)
+    expect(user.calculateTripCost(tripsData[5], destinations.findByQuery('id', tripsData[5].destinationID))).to.equal(3520)
+    expect(user.calculateTripCost(tripsData[9], destinations.findByQuery('id', tripsData[9].destinationID))).to.equal(3586)
+
   })
 
   it("Should be able to calculate it's non-pending travel expeneses for THIS year (plus 10% agent fees)", () => {
-    expect(user.CalculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, 'approved')).to.equal(1)
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, 'approved')).to.equal(1)
   })
 });
