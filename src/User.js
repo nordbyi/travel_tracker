@@ -17,6 +17,10 @@ class User {
   pastTrips(trips, date) {
     return trips.filter(trip => dayjs(trip.date).isBefore(dayjs(date)))
   }
+
+  pendingTrips(trips) {
+    return trips.filter(trip => trip.status === 'pending')
+  }
 }
 
 export default User
