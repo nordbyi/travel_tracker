@@ -73,4 +73,8 @@ describe("Traveler", function () {
       suggestedActivities: [],
     },])
   })
+
+  it("Should return an empty array if no pending trips exist", () => {
+    expect(user.pendingTrips(trips.filterByQuery('userID', 2), '2000/01/01')).to.deep.equal([])
+  })
 });
