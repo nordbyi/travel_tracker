@@ -60,4 +60,17 @@ describe("Traveler", function () {
   it("Should return an empty array if no past trips exist", () => {
     expect(user.pastTrips(trips.filterByQuery('userID', 1), '2000/01/01')).to.deep.equal([])
   })
+
+  it("Should return it's pending trips", () => {
+    expect(user.pendingTrips(trips.filterByQuery('userID', 1))).to.deep.equal([{
+      id: 14,
+      userID: 1,
+      destinationID: 35,
+      travelers: 1,
+      date: "2023/09/24",
+      duration: 10,
+      status: "pending",
+      suggestedActivities: [],
+    },])
+  })
 });
