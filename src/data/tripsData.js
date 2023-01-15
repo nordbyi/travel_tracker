@@ -14,7 +14,7 @@ const tripsData = [
     userID: 1,
     destinationID: 22,
     travelers: 4,
-    date: "2022/05/22",
+    date: "2021/05/22",
     duration: 17,
     status: "approved",
     suggestedActivities: [],
@@ -60,13 +60,12 @@ const tripsData = [
     status: "approved",
     suggestedActivities: [],
   },
-
   {
     id: 14,
     userID: 1,
     destinationID: 35,
     travelers: 1,
-    date: "2022/09/24",
+    date: "2023/09/24",
     duration: 10,
     status: "pending",
     suggestedActivities: [],
