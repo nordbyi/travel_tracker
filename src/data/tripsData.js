@@ -10,7 +10,7 @@ const tripsData = [
     suggestedActivities: [],
   },
   {
-    id: 1,
+    id: 2,
     userID: 3,
     destinationID: 22,
     travelers: 4,
@@ -20,7 +20,7 @@ const tripsData = [
     suggestedActivities: [],
   },
   {
-    id: 1,
+    id: 4,
     userID: 43,
     destinationID: 14,
     travelers: 2,
@@ -30,7 +30,7 @@ const tripsData = [
     suggestedActivities: [],
   },
   {
-    id: 2,
+    id: 5,
     userID: 42,
     destinationID: 29,
     travelers: 3,
@@ -40,7 +40,7 @@ const tripsData = [
     suggestedActivities: [],
   },
   {
-    id: 2,
+    id: 6,
     userID: 29,
     destinationID: 35,
     travelers: 3,
@@ -50,7 +50,7 @@ const tripsData = [
     suggestedActivities: [],
   },
   {
-    id: 2,
+    id: 7,
     userID: 37,
     destinationID: 17,
     travelers: 5,
