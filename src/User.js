@@ -28,7 +28,13 @@ class User {
     return trips.filter(trip => dayjs(trip.date).isAfter(dayjs(date)) && trip.status === 'approved')
   }
 
-  CalculateExpensesForYear(trips, currentDate, status) {
+  calculateTripCost(trip, destination) {
+    const flightCost = trip.travelers * destination.estimatedFlightCostPerPerson
+    const lodgingCost = trip.duration * destination.estimatedLodgingCostPerDay
+    return +((flightCost + lodgingCost) * 1.1).toFixed()
+  }
+
+  calculateExpensesForYear(trips, currentDate, status) {
     return trips.reduce((expenses, trip) => {
       const dayObj = dayjs(currentDate)
       if(trip.status === status && dayjs(trip.date).isBetween(dayObj.startOf('year'), dayObj.endOf('year'))) {
