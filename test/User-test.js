@@ -6,7 +6,7 @@ import { destinationsData } from "../src/data/destinationsData";
 import Trips from "../src/Trips";
 import { tripsData } from "../src/data/tripsData";
 
-describe("Traveler", function () {
+describe("User", function () {
   let user;
   let destinations;
   let trips;
@@ -100,6 +100,16 @@ describe("Traveler", function () {
         status: "approved",
         suggestedActivities: [],
       },
+      {
+        id: 30,
+        userID: 1,
+        destinationID: 9,
+        travelers: 1,
+        date: "2022/05/14",
+        duration: 4,
+        status: "approved",
+        suggestedActivities: [],
+      },
     ]);
   });
 
@@ -120,11 +130,11 @@ describe("Traveler", function () {
   })
 
   it("Should return message if trip.destinationID and destination.id don't match", () => {
-    expect(user.calculateTripCost(tripsData[9], destinations.findByQuery('id', 6))).to.equal("Trip.destinationID and destination.Id Don\'t match")
-    expect(user.calculateTripCost(tripsData[2], destinations.findByQuery('id', 7))).to.equal("Trip.destinationID and destination.Id Don\'t match")
+    expect(user.calculateTripCost(tripsData[9], destinations.findByQuery('id', 6))).to.equal("Trip.destinationID and destination.id Don\'t match")
+    expect(user.calculateTripCost(tripsData[2], destinations.findByQuery('id', 7))).to.equal("Trip.destinationID and destination.id Don\'t match")
   })
 
   it("Should be able to calculate it's non-pending travel expeneses for THIS year (plus 10% agent fees)", () => {
-    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, 'approved')).to.equal(1)
+    expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate, 'approved', destinations)).to.equal(5005)
   })
 });
