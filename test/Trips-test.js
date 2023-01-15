@@ -74,5 +74,17 @@ describe("Trips", function () {
         suggestedActivities: [],
       },
     ]);
+    expect(trips.filterByQuery("userID", 18)).to.deep.equal([
+      {
+        id: 18,
+        userID: 18,
+        destinationID: 2,
+        travelers: 2,
+        date: "2022/09/25",
+        duration: 17,
+        status: "approved",
+        suggestedActivities: [],
+      },
+    ]);
   });
 });
