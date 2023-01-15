@@ -156,6 +156,26 @@ describe("Trips", function () {
         status: "pending",
         suggestedActivities: [],
       },
+      {
+        id: 31,
+        userID: 1,
+        destinationID: 6,
+        travelers: 1,
+        date: "2022/05/14",
+        duration: 1,
+        status: "pending",
+        suggestedActivities: [],
+      },
+      {
+        id: 31,
+        userID: 1,
+        destinationID: 4,
+        travelers: 1,
+        date: "2022/09/14",
+        duration: 1,
+        status: "pending",
+        suggestedActivities: [],
+      },
     ]);
     expect(trips.filterByQuery("status", "approved")).to.deep.equal([
       {
