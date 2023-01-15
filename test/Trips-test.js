@@ -89,12 +89,50 @@ describe("Trips", function () {
   });
 
   it("Should return an empty array if no trips match ID", () => {
-    expect(trips.filterByQuery("userID", 100)).to.deep.equal([])
-    expect(trips.filterByQuery("userID", '50')).to.deep.equal([])
-    expect(trips.filterByQuery("userID", '18')).to.deep.equal([])
-    expect(trips.filterByQuery("userID", null)).to.deep.equal([])
-    expect(trips.filterByQuery("userID", undefined)).to.deep.equal([])
-    expect(trips.filterByQuery("userID", false)).to.deep.equal([])
+    expect(trips.filterByQuery("userID", 100)).to.deep.equal([]);
+    expect(trips.filterByQuery("userID", "50")).to.deep.equal([]);
+    expect(trips.filterByQuery("userID", "18")).to.deep.equal([]);
+    expect(trips.filterByQuery("userID", null)).to.deep.equal([]);
+    expect(trips.filterByQuery("userID", undefined)).to.deep.equal([]);
+    expect(trips.filterByQuery("userID", false)).to.deep.equal([]);
+  });
 
-  })
+  it("Should be able to find all trips for a destinationID", () => {
+    expect(trips.filterByQuery("destinationID", 50)).to.deep.equal([
+      {
+        id: 10,
+        userID: 9,
+        destinationID: 50,
+        travelers: 6,
+        date: "2022/07/23",
+        duration: 17,
+        status: "approved",
+        suggestedActivities: [],
+      },
+    ]);
+
+    expect(trips.filterByQuery("destinationID", 35)).to.deep.equal([
+      {
+        id: 6,
+        userID: 29,
+        destinationID: 35,
+        travelers: 3,
+        date: "2023/06/29",
+        duration: 9,
+        status: "approved",
+        suggestedActivities: [],
+      },
+      {
+        id: 14,
+        userID: 19,
+        destinationID: 35,
+        travelers: 1,
+        date: "2022/09/24",
+        duration: 10,
+        status: "approved",
+        suggestedActivities: [],
+      },
+    ]);
+  });
+  
 });
