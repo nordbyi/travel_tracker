@@ -153,6 +153,6 @@ describe("Destination", function () {
   })
 
   it("Should return an empty array if no destinations match destination names", () => {
-    expect(destinations.filterByQuery("id", ["Washington DC, USA", "Mexico City, Mexico", "Toronto, Canada"])).to.deep.equal([])
+    expect(destinations.filterByQuery("destination", ["Washington DC, USA", "Mexico City, Mexico", "Calgary, Canada"])).to.deep.equal([])
   })
 });
