@@ -43,7 +43,7 @@ describe("Traveler", function () {
   });
 
   it("Should return it's past trips", () => {
-    expect(user.pastTrips()).to.deep.equal([
+    expect(user.pastTrips(trips.filterByQuery('userID', 1), currentDate)).to.deep.equal([
       {
         id: 2,
         userID: 1,
@@ -56,4 +56,8 @@ describe("Traveler", function () {
       },
     ]);
   });
+
+  it("Should return an empty array if no past trips exist", () => {
+    expect(user.pastTrips(trips.filterByQuery('userID', 1), '2000/01/01')).to.deep.equal([])
+  })
 });
