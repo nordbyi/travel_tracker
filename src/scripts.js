@@ -36,9 +36,10 @@ let trips;
 let destinations;
 let user;
 let userTrips;
-
+console.log(dayjs("2020/04/01/"))
+// format dates for correct display
 // change fetch all argument to login page traveler id
-fetchAll(2).then((data) => {
+fetchAll(7).then((data) => {
   console.log(data);
   onLoadData(data);
   renderDOM();
@@ -46,7 +47,12 @@ fetchAll(2).then((data) => {
 
 function onLoadData(data) {
   travelers = data[0].travelers; // need this?
-  trips = new Trips(data[1].trips);
+  trips = new Trips(data[1].trips.map(trip => {
+    return {
+      ...trip,
+      date: dayjs(trip.date).format('YYYY/MM/DD')
+    }
+  }));
   destinations = new Destinations(
     data[2].destinations.sort((a, b) =>
       a.destination.localeCompare(b.destination)
@@ -117,7 +123,7 @@ function displayUserTrips() {
 
     pastTrips.innerHTML += `
     <article class="trip-display">
-      <img class="trip-image" src="${destination.image} alt="${destination.alt}">
+      <img class="trip-image" src="${destination.image}" alt="${destination.alt}">
       <p class="trip-text" >${destination.destination}<p/>
       <p class="trip-text" >${trip.date}<p/>
     <article />`;
@@ -128,7 +134,7 @@ function displayUserTrips() {
 
     upcomingTrips.innerHTML += `
     <article class="trip-display">
-      <img class="trip-image" src="${destination.image} alt="${destination.alt}">
+      <img class="trip-image" src="${destination.image}" alt="${destination.alt}">
       <p class="trip-text" >${destination.destination}<p/>
       <p class="trip-text" >${trip.date}<p/>
     <article />`;
@@ -139,7 +145,7 @@ function displayUserTrips() {
 
     pendingTrips.innerHTML += `
     <article class="trip-display">
-      <img class="trip-image" src="${destination.image} alt="${destination.alt}">
+      <img class="trip-image" src="${destination.image}" alt="${destination.alt}">
       <p class="trip-text" >${destination.destination}<p/>
       <p class="trip-text" >${trip.date}<p/>
     <article />`;
@@ -202,7 +208,7 @@ function validateForm() {
   formErrorContainer.innerText = "";
   const [startDate, endDate, destination, numTravelers, duration] =
     accessFormInputs();
-    
+
   if (startDate.format('YYYY/MM/DD') === "Invalid Date") {
     displayFormError("Invalid Start Date Entered");
     return false;
