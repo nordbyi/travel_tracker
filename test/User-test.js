@@ -167,7 +167,7 @@ describe("User", function () {
     expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 29), currentDate, destinations)).to.deep.equal({approved: 0, pending: 0})
   })
 
-  it("Should return a message if no trips, currentDate, or destination class instance given", () => {
+  it("Should return a message if no trips, currentDate, or destination class instance passed as an argument", () => {
     expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), currentDate)).to.equal('Please include trips array, currentDate, and destination class instance')
     expect(user.calculateExpensesForYear(trips.filterByQuery("userID", 1), destinations)).to.equal('Please include trips array, currentDate, and destination class instance')
     expect(user.calculateExpensesForYear(currentDate, destinations)).to.equal('Please include trips array, currentDate, and destination class instance')
