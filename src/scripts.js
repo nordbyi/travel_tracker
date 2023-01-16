@@ -35,6 +35,7 @@ tripStartCalendar.addEventListener("change", updateEndCalendar);
 previewTripButton.addEventListener("click", function() {
   event.preventDefault()
   if (!validateForm()) return;
+  modalContent.innerHTML = previewTrip() // make function to preview a trip and destination based on inputs
   MicroModal.show('BookTrip');
 });
 modalBookButton.addEventListener('click', function() {
@@ -202,6 +203,7 @@ function validateForm() {
   formErrorContainer.innerText = "";
   const [startDate, endDate, destination, numTravelers, duration] =
     accessFormInputs();
+    console.log(destination)
 
   if (startDate.format('YYYY/MM/DD') === "Invalid Date") {
     displayFormError("Invalid Start Date Entered");
@@ -268,6 +270,29 @@ function createTripCard(trip, destination) {
     <article class="trip-display">
       <img class="trip-image" src="${destination.image}" alt="${destination.alt}">
       <p class="trip-text" >${destination.destination}<p/>
-      <p class="trip-text" >${trip.date}<p/>
+      <p class="trip-start" >${trip.date}<p/>
+      <p class="trip-duration" >${trip.duration} Days<p/>
+      <p class="trip-cost" >$${user.calculateTripCost(trip, destination)}<p/>
     <article />`;
+}
+
+function previewTrip() {
+  const [startDate, endDate, destination, numTravelers, duration] =
+    accessFormInputs();
+  const trip = {
+    date: startDate.format('YYYY/MM/DD'),
+    travelers: numTravelers,
+    duration: duration,
+    destinationID: destination.id
+  }
+  return `
+  <article class="preview-trip">
+    <img class="preview-image" src="${destination.image}" alt="${destination.alt}">
+    <div>
+      <p class="trip-text" >${destination.destination}<p/>
+      <p class="trip-start" >${trip.date}<p/>
+      <p class="trip-duration" >${trip.duration} Days<p/>
+      <p class="trip-cost" >$${user.calculateTripCost(trip, destination)}<p/>
+      <div/>
+  <article />`
 }
