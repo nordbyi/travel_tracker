@@ -18,22 +18,21 @@ const pastTrips = document.querySelector("#pastTrips");
 const upcomingTrips = document.querySelector("#upcomingTrips");
 const pendingTrips = document.querySelector("#pendingTrips");
 
-const destinationInput = document.querySelector('#destinationsInput')
-const tripStartInput = document.querySelector('#tripStartInput')
-const tripEndInput = document.querySelector('#tripEndInput')
-const numTravelersInput = document.querySelector('#numTravelersInput')
-const previewTripButton = document.querySelector('#previewTrip')
-
+const destinationInput = document.querySelector("#destinationsInput");
+const tripStartInput = document.querySelector("#tripStartInput");
+const tripEndInput = document.querySelector("#tripEndInput");
+const numTravelersInput = document.querySelector("#numTravelersInput");
+const previewTripButton = document.querySelector("#previewTrip");
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
-previewTripButton.addEventListener('click', previewTrip)
+previewTripButton.addEventListener("click", previewTrip);
 
 let currentDate = dayjs().format("YYYY/MM/DD");
 let travelers; // need this?
 let trips;
 let destinations;
 let user;
-let userTrips
+let userTrips;
 
 // change fetch all argument to login page traveler id
 fetchAll(2).then((data) => {
@@ -45,10 +44,14 @@ fetchAll(2).then((data) => {
 function onLoadData(data) {
   travelers = data[0].travelers; // need this?
   trips = new Trips(data[1].trips);
-  destinations = new Destinations(data[2].destinations.sort((a, b) => a.destination.localeCompare(b.destination)));
+  destinations = new Destinations(
+    data[2].destinations.sort((a, b) =>
+      a.destination.localeCompare(b.destination)
+    )
+  );
   user = new User(data[3]);
-  console.log(user)
-  userTrips = trips.filterByQuery("userID", user.id)
+  console.log(user);
+  userTrips = trips.filterByQuery("userID", user.id);
 }
 
 function renderDOM() {
@@ -58,15 +61,14 @@ function renderDOM() {
   insertSlides(destinations.destinations);
   swiper();
   displayTotalExpenses();
-  displayUserTrips()
+  displayUserTrips();
 }
 
 function updateSelectOptions(destinations) {
   selectInput.innerHTML = "";
-  destinations.destinations
-    .forEach((destination) => {
-      selectInput.innerHTML += `<option value="${destination.destination}">${destination.destination}</option>`;
-    });
+  destinations.destinations.forEach((destination) => {
+    selectInput.innerHTML += `<option value="${destination.destination}">${destination.destination}</option>`;
+  });
 }
 
 function updateStartCalendar() {
@@ -94,13 +96,16 @@ function displayTotalExpenses() {
     userTrips,
     currentDate,
     destinations
-  )
-  totalExpenses.innerText = `This Year's Expenditures: Approved: $${totals.approved} Pending: $${totals.pending}`
+  );
+  totalExpenses.innerText = `This Year's Expenditures: Approved: $${totals.approved} Pending: $${totals.pending}`;
 }
 
 function displayUserTrips() {
-  user.pastTrips(userTrips, currentDate).forEach(trip => {
-    const destination = destinations.findByQuery('id', trip.destinationID)
+  pastTrips.innerHTML = ''
+  upcomingTrips.innerHTML = ''
+  pendingTrips.innerHTML = ''
+  user.pastTrips(userTrips, currentDate).forEach((trip) => {
+    const destination = destinations.findByQuery("id", trip.destinationID);
     // console.log(destination)
 
     pastTrips.innerHTML += `
@@ -108,10 +113,10 @@ function displayUserTrips() {
       <img class="trip-image" src="${destination.image} alt="${destination.alt}">
       <p class="trip-text" >${destination.destination}<p/>
       <p class="trip-text" >${trip.date}<p/>
-    <article />`
-  })
-  user.upcomingTrips(userTrips, currentDate).forEach(trip => {
-    const destination = destinations.findByQuery('id', trip.destinationID)
+    <article />`;
+  });
+  user.upcomingTrips(userTrips, currentDate).forEach((trip) => {
+    const destination = destinations.findByQuery("id", trip.destinationID);
     // console.log(destination)
 
     upcomingTrips.innerHTML += `
@@ -119,10 +124,10 @@ function displayUserTrips() {
       <img class="trip-image" src="${destination.image} alt="${destination.alt}">
       <p class="trip-text" >${destination.destination}<p/>
       <p class="trip-text" >${trip.date}<p/>
-    <article />`
-  })
-  user.pendingTrips(userTrips).forEach(trip => {
-    const destination = destinations.findByQuery('id', trip.destinationID)
+    <article />`;
+  });
+  user.pendingTrips(userTrips).forEach((trip) => {
+    const destination = destinations.findByQuery("id", trip.destinationID);
     // console.log(destination)
 
     pendingTrips.innerHTML += `
@@ -130,8 +135,8 @@ function displayUserTrips() {
       <img class="trip-image" src="${destination.image} alt="${destination.alt}">
       <p class="trip-text" >${destination.destination}<p/>
       <p class="trip-text" >${trip.date}<p/>
-    <article />`
-  })
+    <article />`;
+  });
 
   // userTrips.forEach(trip => {
   //   const destination = destinations.findByQuery('id', trip.destinationID)
@@ -141,26 +146,42 @@ function displayUserTrips() {
 }
 
 function previewTrip() {
-  event.preventDefault()
+  event.preventDefault();
   //validate form
-  const destination = destinations.findByQuery('destination', destinationInput.value)
-  const startDate = dayjs(tripStartInput.value)
-  console.log(destination)
-  console.log(startDate.format('YYYY/MM/DD'))
-  console.log(Math.abs(startDate.diff(dayjs(tripEndCalendar.value), 'day')))
-  console.log(numTravelersInput.value)
+  const destination = destinations.findByQuery(
+    "destination",
+    destinationInput.value
+  );
+  const startDate = dayjs(tripStartInput.value);
+  console.log(destination);
+  console.log(startDate.format("YYYY/MM/DD"));
+  console.log(Math.abs(startDate.diff(dayjs(tripEndCalendar.value), "day")));
+  console.log(numTravelersInput.value);
 
   const postObject = {
     id: trips.trips.length + 1,
     userID: user.id,
     destinationID: destination.id,
     travelers: +numTravelersInput.value,
-    date: startDate.format('YYYY/MM/DD'),
-    duration: Math.abs(dayjs(tripEndCalendar.value).diff(startDate, 'day')),
-    status: 'pending',
-    suggestedActivities: []
-  }
+    date: startDate.format("YYYY/MM/DD"),
+    duration: Math.abs(dayjs(tripEndCalendar.value).diff(startDate, "day")),
+    status: "pending",
+    suggestedActivities: [],
+  };
 
-  console.log(postObject)
-  postData(postObject).then(res => console.log(res))
+  console.log(postObject);
+  postData(postObject).then((res) => {
+    if (!res.ok) {
+      throw new Error(`${res.status}: ${res.statusText}`);
+    }
+    // change fetch all argument to login page traveler id
+    fetchAll(2).then((data) => {
+      console.log(data);
+      onLoadData(data);
+      renderDOM();
+    });
+    console.log(res);
+  });
 }
+
+// clear inputs function
