@@ -23,6 +23,7 @@ const tripStartInput = document.querySelector("#tripStartInput");
 const tripEndInput = document.querySelector("#tripEndInput");
 const numTravelersInput = document.querySelector("#numTravelersInput");
 const previewTripButton = document.querySelector("#previewTrip");
+const formErrorContainer = document.querySelector('#formError')
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 previewTripButton.addEventListener("click", previewTrip);
@@ -195,4 +196,18 @@ function clearInputs() {
   updateStartCalendar(true);
   updateEndCalendar(true);
 }
-// clear inputs function
+function validateForm() {
+  formErrorContainer.innerText = ''
+  const startDate = dayjs(tripStartInput.value);
+  const endDate = dayjs(tripEndInput.value);
+  const destination = destinations.findByQuery(
+    "destination",
+    destinationInput.value
+  )
+  const numTravelers = numTravelersInput.value
+  const duration = Math.abs(dayjs(tripEndCalendar.value).diff(startDate, "day"))
+}
+
+function displayFormError(message) {
+  formErrorContainer.innerText = message
+}
