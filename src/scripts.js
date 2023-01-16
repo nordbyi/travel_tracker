@@ -198,6 +198,10 @@ function clearInputs() {
 }
 function validateForm() {
   formErrorContainer.innerText = ''
+  [startDate, endDate, destination, numTravelers, duration] = accessFormInputs()
+}
+
+function accessFormInputs() {
   const startDate = dayjs(tripStartInput.value);
   const endDate = dayjs(tripEndInput.value);
   const destination = destinations.findByQuery(
@@ -206,6 +210,7 @@ function validateForm() {
   )
   const numTravelers = numTravelersInput.value
   const duration = Math.abs(dayjs(tripEndCalendar.value).diff(startDate, "day"))
+  return [startDate, endDate, destination, numTravelers, duration]
 }
 
 function displayFormError(message) {
