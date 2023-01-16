@@ -36,9 +36,9 @@ let trips;
 let destinations;
 let user;
 let userTrips;
-console.log(dayjs("2020/04/01/"))
-// format dates for correct display
+
 // change fetch all argument to login page traveler id
+// change fetchall parameter in post as well
 fetchAll(7).then((data) => {
   console.log(data);
   onLoadData(data);
@@ -117,34 +117,19 @@ function displayUserTrips() {
     const destination = destinations.findByQuery("id", trip.destinationID);
     // console.log(destination)
 
-    pastTrips.innerHTML += `
-    <article class="trip-display">
-      <img class="trip-image" src="${destination.image}" alt="${destination.alt}">
-      <p class="trip-text" >${destination.destination}<p/>
-      <p class="trip-text" >${trip.date}<p/>
-    <article />`;
+    pastTrips.innerHTML += createTripCard(trip, destination);
   });
   user.upcomingTrips(userTrips, currentDate).forEach((trip) => {
     const destination = destinations.findByQuery("id", trip.destinationID);
     // console.log(destination)
 
-    upcomingTrips.innerHTML += `
-    <article class="trip-display">
-      <img class="trip-image" src="${destination.image}" alt="${destination.alt}">
-      <p class="trip-text" >${destination.destination}<p/>
-      <p class="trip-text" >${trip.date}<p/>
-    <article />`;
+    upcomingTrips.innerHTML += createTripCard(trip, destination);
   });
   user.pendingTrips(userTrips).forEach((trip) => {
     const destination = destinations.findByQuery("id", trip.destinationID);
     // console.log(destination)
 
-    pendingTrips.innerHTML += `
-    <article class="trip-display">
-      <img class="trip-image" src="${destination.image}" alt="${destination.alt}">
-      <p class="trip-text" >${destination.destination}<p/>
-      <p class="trip-text" >${trip.date}<p/>
-    <article />`;
+    pendingTrips.innerHTML += createTripCard(trip, destination)
   });
 
   // userTrips.forEach(trip => {
@@ -263,4 +248,13 @@ function displayFormError(message) {
 
 function displayFetchError(message) {
   fetchErrorContainer.innerText = message;
+}
+
+function createTripCard(trip, destination) {
+  return `
+    <article class="trip-display">
+      <img class="trip-image" src="${destination.image}" alt="${destination.alt}">
+      <p class="trip-text" >${destination.destination}<p/>
+      <p class="trip-text" >${trip.date}<p/>
+    <article />`;
 }
