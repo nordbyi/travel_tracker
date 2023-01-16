@@ -13,7 +13,7 @@ import Trips from "./Trips";
 const selectInput = document.querySelector("#destinationsInput");
 const tripStartCalendar = document.querySelector("#tripStartInput");
 const tripEndCalendar = document.querySelector("#tripEndInput");
-const totalExpenses = document.querySelector("");
+const totalExpenses = document.querySelector("#totalExpenses");
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 
@@ -33,7 +33,7 @@ fetchAll(1).then((data) => {
 function onLoadData(data) {
   travelers = data[0].travelers;
   trips = new Trips(data[1].trips);
-  destinations = new Destinations(data[2].destinations);
+  destinations = new Destinations(data[2].destinations.sort((a, b) => a.destination.localeCompare(b.destination)));
   user = new User(data[3]);
 }
 
@@ -41,15 +41,14 @@ function renderDOM() {
   updateSelectOptions(destinations);
   updateStartCalendar();
   updateEndCalendar();
-  insertSlides(destinations);
+  insertSlides(destinations.destinations);
   swiper();
   displayTotalExpenses();
 }
 
 function updateSelectOptions(destinations) {
   selectInput.innerHTML = "";
-  destinations
-    .sort((a, b) => a.destination.localeCompare(b.destination))
+  destinations.destinations
     .forEach((destination) => {
       selectInput.innerHTML += `<option value=${destination.destination}>${destination.destination}</option>`;
     });
@@ -75,4 +74,11 @@ function updateEndCalendar() {
   }
 }
 
-function displayTotalExpenses() {}
+function displayTotalExpenses() {
+  const totals = user.calculateExpensesForYear(
+    trips.filterByQuery("id", user.id),
+    currentDate,
+    destinations
+  )
+  totalExpenses.innerText = `This Year's Expenditures: Approved: ${totals.approved} Pending: ${totals.pending}`
+}
