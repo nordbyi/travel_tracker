@@ -67,6 +67,17 @@ body {
   height: 175px;
 }
 
+.preview-trip {
+  height: 60vh;
+  width: 60vh;
+  display: flex;
+}
+
+.preview-image {
+  width: 300px;
+  height: 350px;
+}
+
 /* Micromodal styles */
 .modal {
   font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
