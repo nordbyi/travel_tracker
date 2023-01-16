@@ -14,6 +14,10 @@ const selectInput = document.querySelector("#destinationsInput");
 const tripStartCalendar = document.querySelector("#tripStartInput");
 const tripEndCalendar = document.querySelector("#tripEndInput");
 const totalExpenses = document.querySelector("#totalExpenses");
+const pastTrips = document.querySelector("#pastTrips");
+const upcomingTrips = document.querySelector("#upcomingTrips");
+const pendingTrips = document.querySelector("#pendingTrips");
+
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 
