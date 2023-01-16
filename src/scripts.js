@@ -23,7 +23,9 @@ const tripStartInput = document.querySelector("#tripStartInput");
 const tripEndInput = document.querySelector("#tripEndInput");
 const numTravelersInput = document.querySelector("#numTravelersInput");
 const previewTripButton = document.querySelector("#previewTrip");
-const formErrorContainer = document.querySelector('#formError')
+
+const formErrorContainer = document.querySelector("#formError");
+const fetchErrorContainer = document.querySelector("#fetchError");
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 previewTripButton.addEventListener("click", previewTrip);
@@ -152,8 +154,9 @@ function displayUserTrips() {
 
 function previewTrip() {
   event.preventDefault();
-  if(!validateForm()) return
-  const [startDate, endDate, destination, numTravelers, duration] = accessFormInputs()
+  if (!validateForm()) return;
+  const [startDate, endDate, destination, numTravelers, duration] =
+    accessFormInputs();
   console.log(destination);
   console.log(startDate.format("YYYY/MM/DD"));
   console.log(Math.abs(startDate.diff(dayjs(endDate), "day")));
@@ -171,19 +174,21 @@ function previewTrip() {
   };
 
   console.log(postObject);
-  postData(postObject).then((res) => {
-    if (!res.ok) {
-      throw new Error(`${res.status}: ${res.statusText}`);
-    }
-    // change fetch all argument to login page traveler id
-    fetchAll(2).then((data) => {
-      console.log(data);
-      onLoadData(data);
-      renderDOM();
-      clearInputs();
-    });
-    console.log(res);
-  });
+  postData(postObject)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`${res.status}: ${res.statusText}`);
+      }
+      // change fetch all argument to login page traveler id
+      fetchAll(2).then((data) => {
+        console.log(data);
+        onLoadData(data);
+        renderDOM();
+        clearInputs();
+      });
+      console.log(res);
+    })
+    .catch((error) => displayFetchError(error));
 }
 
 function clearInputs() {
@@ -194,39 +199,40 @@ function clearInputs() {
 }
 
 function validateForm() {
-  formErrorContainer.innerText = ''
-  const [startDate, endDate, destination, numTravelers, duration] = accessFormInputs()
-  if(startDate.$d === 'Invalid Date {}' || endDate.$d === 'Invalid Date {}') {
-    displayFormError('Invalid Date Entered')
-    return false
-  }
-  
-  if(!startDate || !endDate || !destination || !numTravelers) {
-    displayFormError('Please complete all inputs')
-    return false
+  formErrorContainer.innerText = "";
+  const [startDate, endDate, destination, numTravelers, duration] =
+    accessFormInputs();
+  if (startDate.$d === "Invalid Date {}" || endDate.$d === "Invalid Date {}") {
+    displayFormError("Invalid Date Entered");
+    return false;
   }
 
-  if(duration < 1) {
-    displayFormError('Trip Must Be At Least 1 Day Long')
-    return false
+  if (!startDate || !endDate || !destination || !numTravelers) {
+    displayFormError("Please complete all inputs");
+    return false;
   }
 
-  if(startDate.isAfter(endDate)) {
-    displayFormError('End Date Must Be After Start Date')
-    return false
+  if (duration < 1) {
+    displayFormError("Trip Must Be At Least 1 Day Long");
+    return false;
   }
 
-  if(startDate.isBefore(dayjs(), 'day')) {
-    displayFormError('Start Date Cannot Be In The Past')
-    return false
+  if (startDate.isAfter(endDate)) {
+    displayFormError("End Date Must Be After Start Date");
+    return false;
   }
 
-  if(+numTravelers < 0) {
-    displayFormError('Number Of Travelers Cannot Be A Negative Number')
-    return false
+  if (startDate.isBefore(dayjs(), "day")) {
+    displayFormError("Start Date Cannot Be In The Past");
+    return false;
   }
 
-  return true
+  if (+numTravelers < 0) {
+    displayFormError("Number Of Travelers Cannot Be A Negative Number");
+    return false;
+  }
+
+  return true;
 }
 
 function accessFormInputs() {
@@ -235,12 +241,18 @@ function accessFormInputs() {
   const destination = destinations.findByQuery(
     "destination",
     destinationInput.value
-  )
-  const numTravelers = numTravelersInput.value
-  const duration = Math.abs(dayjs(tripEndCalendar.value).diff(startDate, "day"))
-  return [startDate, endDate, destination, numTravelers, duration]
+  );
+  const numTravelers = numTravelersInput.value;
+  const duration = Math.abs(
+    dayjs(tripEndCalendar.value).diff(startDate, "day")
+  );
+  return [startDate, endDate, destination, numTravelers, duration];
 }
 
 function displayFormError(message) {
-  formErrorContainer.innerText = message
+  formErrorContainer.innerText = message;
+}
+
+function displayFetchError(message) {
+  fetchErrorContainer.innerText = message;
 }
