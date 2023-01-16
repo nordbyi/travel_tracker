@@ -71,22 +71,26 @@ function updateSelectOptions(destinations) {
   });
 }
 
-function updateStartCalendar() {
+function updateStartCalendar(reset) {
+  console.log("update start calendar");
   const calendarDate = dayjs(currentDate).format("YYYY-MM-DD");
-  if (!tripStartCalendar.value) {
+  if (!tripStartCalendar.value || reset) {
     tripStartCalendar.setAttribute("min", calendarDate);
     tripStartCalendar.value = calendarDate;
   }
 }
 
-function updateEndCalendar() {
+function updateEndCalendar(reset) {
   if (
     !tripEndCalendar.value ||
-    dayjs(tripStartCalendar.value).isAfter(dayjs(tripEndCalendar.value))
+    dayjs(tripStartCalendar.value).isAfter(dayjs(tripEndCalendar.value)) ||
+    reset
   ) {
+    console.log("set end");
     tripEndCalendar.value = tripStartCalendar.value;
     tripEndCalendar.setAttribute("min", tripStartCalendar.value);
   } else {
+    console.log("not here on update");
     tripEndCalendar.setAttribute("min", tripStartCalendar.value);
   }
 }
@@ -101,9 +105,9 @@ function displayTotalExpenses() {
 }
 
 function displayUserTrips() {
-  pastTrips.innerHTML = ''
-  upcomingTrips.innerHTML = ''
-  pendingTrips.innerHTML = ''
+  pastTrips.innerHTML = "";
+  upcomingTrips.innerHTML = "";
+  pendingTrips.innerHTML = "";
   user.pastTrips(userTrips, currentDate).forEach((trip) => {
     const destination = destinations.findByQuery("id", trip.destinationID);
     // console.log(destination)
@@ -179,9 +183,16 @@ function previewTrip() {
       console.log(data);
       onLoadData(data);
       renderDOM();
+      clearInputs();
     });
     console.log(res);
   });
 }
 
+function clearInputs() {
+  console.log("clear inputs");
+  numTravelersInput.value = "";
+  updateStartCalendar(true);
+  updateEndCalendar(true);
+}
 // clear inputs function
