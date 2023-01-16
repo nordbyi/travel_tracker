@@ -22,23 +22,26 @@ const pendingTrips = document.querySelector("#pendingTrips");
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 
 let currentDate = dayjs().format("YYYY/MM/DD");
-let travelers;
+let travelers; // need this?
 let trips;
 let destinations;
 let user;
+let userTrips
 
 // change fetch all argument to login page traveler id
-fetchAll(1).then((data) => {
+fetchAll(2).then((data) => {
   console.log(data);
   onLoadData(data);
   renderDOM();
 });
 
 function onLoadData(data) {
-  travelers = data[0].travelers;
+  travelers = data[0].travelers; // need this?
   trips = new Trips(data[1].trips);
   destinations = new Destinations(data[2].destinations.sort((a, b) => a.destination.localeCompare(b.destination)));
   user = new User(data[3]);
+  console.log(user)
+  userTrips = trips.filterByQuery("userID", user.id)
 }
 
 function renderDOM() {
@@ -48,6 +51,7 @@ function renderDOM() {
   insertSlides(destinations.destinations);
   swiper();
   displayTotalExpenses();
+  displayUserTrips()
 }
 
 function updateSelectOptions(destinations) {
@@ -80,9 +84,51 @@ function updateEndCalendar() {
 
 function displayTotalExpenses() {
   const totals = user.calculateExpensesForYear(
-    trips.filterByQuery("id", user.id),
+    userTrips,
     currentDate,
     destinations
   )
-  totalExpenses.innerText = `This Year's Expenditures: Approved: ${totals.approved} Pending: ${totals.pending}`
+  totalExpenses.innerText = `This Year's Expenditures: Approved: $${totals.approved} Pending: $${totals.pending}`
+}
+
+function displayUserTrips() {
+  user.pastTrips(userTrips, currentDate).forEach(trip => {
+    const destination = destinations.findByQuery('id', trip.destinationID)
+    console.log(destination)
+
+    pastTrips.innerHTML += `
+    <article class="trip-display">
+      <img class="trip-image" src="${destination.image} alt="${destination.alt}">
+      <p class="trip-text" >${destination.destination}<p/>
+      <p class="trip-text" >${trip.date}<p/>
+    <article />`
+  })
+  user.upcomingTrips(userTrips, currentDate).forEach(trip => {
+    const destination = destinations.findByQuery('id', trip.destinationID)
+    console.log(destination)
+
+    upcomingTrips.innerHTML += `
+    <article class="trip-display">
+      <img class="trip-image" src="${destination.image} alt="${destination.alt}">
+      <p class="trip-text" >${destination.destination}<p/>
+      <p class="trip-text" >${trip.date}<p/>
+    <article />`
+  })
+  user.pendingTrips(userTrips).forEach(trip => {
+    const destination = destinations.findByQuery('id', trip.destinationID)
+    console.log(destination)
+
+    pendingTrips.innerHTML += `
+    <article class="trip-display">
+      <img class="trip-image" src="${destination.image} alt="${destination.alt}">
+      <p class="trip-text" >${destination.destination}<p/>
+      <p class="trip-text" >${trip.date}<p/>
+    <article />`
+  })
+
+  // userTrips.forEach(trip => {
+  //   const destination = destinations.findByQuery('id', trip.destinationID)
+  //   console.log(destination)
+
+  // })
 }
