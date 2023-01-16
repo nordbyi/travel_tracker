@@ -4,15 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" src="src/css/styles.css" />
     <title>Travel Tracker</title>
   </head>
   <body>
     <nav class="nav">
       <p>Logo</p>
-      <p>Amount Spent on trips + Agent fees</p>
+      <p class="total-expenses" id="totalExpenses">Amount Spent on trips + Agent fees</p>
     </nav>
     <main>
-      <section class="glide-container">
+      <section class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper" id="swiperContainer">
+          <!-- Slides -->
+        
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </section>
       <form>
         <label for="destinationsInput">Find A Destination: </label>
@@ -43,6 +55,15 @@
         />
       </form>
       <section>
+        <p>Past Trips</p>
+        <div class="past-trips" id="pastTrips"></div>
+
+        <p>Upcoming Trips</p>
+        <div class="upcoming-trips" id="upcomingTrips"></div>
+       
+        <p>Pending Trips</p>
+        <div class="pending-trips" id="pendingTrips"></div>
+
         <!-- past, upcomming, and pending trips -->
       </section>
     </main>
