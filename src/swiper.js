@@ -37,7 +37,7 @@ const swiper = () =>
 const insertSlides = (data) => {
   swiperSlideContainer.innerHTML = "";
   data.forEach((el) => {
-    swiperSlideContainer.innerHTML += `<div class="swiper-slide">${`<img src="${el.image}" />`}</div>`;
+    swiperSlideContainer.innerHTML += `<div class="swiper-slide">${`<img src="${el.image}" alt="${el.alt}"/>`}</div>`;
   });
 };
 
