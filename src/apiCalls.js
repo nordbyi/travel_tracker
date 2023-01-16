@@ -13,4 +13,14 @@ const fetchAll = (id) =>
     fetchData(`http://localhost:3001/api/v1/travelers/${id}`),    
   ]);
 
-export { fetchAll };
+const postData = (data) => {
+  return fetch("http://localhost:3001/api/v1/trips", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    }, 
+  })
+}
+
+export { fetchAll, postData };
