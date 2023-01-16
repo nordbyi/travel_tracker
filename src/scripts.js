@@ -6,6 +6,7 @@ import "./css/styles.css";
 import { fetchAll, postData } from "./apiCalls";
 import * as dayjs from "dayjs";
 import { swiper, insertSlides } from "./swiper";
+import MicroModal from 'micromodal'
 import User from "./User";
 import Destinations from "./Destinations";
 import Trips from "./Trips";
@@ -27,8 +28,21 @@ const previewTripButton = document.querySelector("#previewTrip");
 const formErrorContainer = document.querySelector("#formError");
 const fetchErrorContainer = document.querySelector("#fetchError");
 
+const modalContent = document.querySelector("#bookTrip-content")
+const modalBookButton = document.querySelector("#bookTripButton")
+
 tripStartCalendar.addEventListener("change", updateEndCalendar);
-previewTripButton.addEventListener("click", previewTrip);
+previewTripButton.addEventListener("click", function() {
+  event.preventDefault()
+  if (!validateForm()) return;
+  MicroModal.show('BookTrip');
+});
+modalBookButton.addEventListener('click', function() {
+  bookTrip()
+  MicroModal.close()
+})
+
+// set up button in micromodal to call bookTrip (rename previewtrip function to booktrip)
 
 let currentDate = dayjs().format("YYYY/MM/DD");
 let travelers; // need this?
@@ -36,6 +50,7 @@ let trips;
 let destinations;
 let user;
 let userTrips;
+
 
 // change fetch all argument to login page traveler id
 // change fetchall parameter in post as well
@@ -139,9 +154,7 @@ function displayUserTrips() {
   // })
 }
 
-function previewTrip() {
-  event.preventDefault();
-  if (!validateForm()) return;
+function bookTrip() {
   const [startDate, endDate, destination, numTravelers, duration] =
     accessFormInputs();
   // console.log(destination);
