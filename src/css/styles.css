@@ -1,16 +1,7 @@
 * {
-  text-align: center;
+  margin: 0;
 }
 
-body {
-  background: radial-gradient(
-    circle,
-    rgba(63, 94, 251, 1) 0%,
-    rgba(252, 70, 107, 1) 100%
-  );
-}
-
-html,
 body {
   position: relative;
   height: 100%;
@@ -25,6 +16,11 @@ body {
   padding: 0;
 }
 
+.nav {
+  height: 12vh;
+  width: 100%;
+  background-color: aquamarine;
+}
 .swiper {
   width: 100%;
   padding-top: 50px;
@@ -42,6 +38,34 @@ body {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.form {
+  height: 10vh;
+  background-color: aquamarine;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1vh;
+}
+
+.options {
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+}
+
+.input {
+  font-size: 14px;
+  border: none;
+  width: 18%;
+  height: 50%;
+  background: white;
+  margin: 1vw;
+}
+
+.date {
+  height: 50%;
+  margin: 1vw;
 }
 
 .past-trips {
@@ -67,10 +91,14 @@ body {
   height: 175px;
 }
 
+h2 {
+  font-size: 25px;
+  margin-left: 1%;
+}
+
 .preview-trip {
   height: 60vh;
-  width: 60vh;
-  display: flex;
+  /* width: 25vw; */
 }
 
 .preview-image {
@@ -97,7 +125,7 @@ body {
 }
 
 .modal__container {
-  background-color: #fff;
+  background-color: rgb(255, 255, 255) ;
   padding: 30px;
   max-width: 500px;
   max-height: 100vh;
@@ -136,7 +164,7 @@ body {
   color: rgba(0,0,0,.8);
 }
 
-.modal__btn {
+.btn {
   font-size: .875rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -148,7 +176,7 @@ body {
   border-style: none;
   border-width: 0;
   cursor: pointer;
-  -webkit-appearance: button;
+  /* -webkit-appearance: button; */
   text-transform: none;
   overflow: visible;
   line-height: 1.15;
@@ -164,12 +192,12 @@ body {
   transition: transform .25s ease-out,-webkit-transform .25s ease-out;
 }
 
-.modal__btn:focus, .modal__btn:hover {
+.btn:focus, .btn:hover {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }
 
-.modal__btn-primary {
+.btn-primary {
   background-color: #00449e;
   color: #fff;
 }
