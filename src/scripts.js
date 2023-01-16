@@ -42,7 +42,7 @@ fetchAll(2).then((data) => {
   console.log(data);
   onLoadData(data);
   renderDOM();
-});
+}).catch(error => displayFetchError(error.message));
 
 function onLoadData(data) {
   travelers = data[0].travelers; // need this?
@@ -185,7 +185,7 @@ function previewTrip() {
         onLoadData(data);
         renderDOM();
         clearInputs();
-      });
+      }).catch(error => displayFetchError(error.message));
       console.log(res);
     })
     .catch((error) => displayFetchError(error));
@@ -202,8 +202,14 @@ function validateForm() {
   formErrorContainer.innerText = "";
   const [startDate, endDate, destination, numTravelers, duration] =
     accessFormInputs();
-  if (startDate.$d === "Invalid Date {}" || endDate.$d === "Invalid Date {}") {
-    displayFormError("Invalid Date Entered");
+    
+  if (startDate.format('YYYY/MM/DD') === "Invalid Date") {
+    displayFormError("Invalid Start Date Entered");
+    return false;
+  }
+
+  if(endDate.format('YYYY/MM/DD') === "Invalid Date"){
+    displayFormError("Invalid End Date Entered");
     return false;
   }
 
@@ -212,8 +218,8 @@ function validateForm() {
     return false;
   }
 
-  if (duration < 1) {
-    displayFormError("Trip Must Be At Least 1 Day Long");
+  if (startDate.isBefore(dayjs(), "day")) {
+    displayFormError("Start Date Cannot Be In The Past");
     return false;
   }
 
@@ -222,8 +228,8 @@ function validateForm() {
     return false;
   }
 
-  if (startDate.isBefore(dayjs(), "day")) {
-    displayFormError("Start Date Cannot Be In The Past");
+  if (duration < 1) {
+    displayFormError("Trip Must Be At Least 1 Day Long");
     return false;
   }
 
