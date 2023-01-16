@@ -3,7 +3,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./css/styles.css";
-import { fetchAll } from "./apiCalls";
+import { fetchAll, postData } from "./apiCalls";
 import * as dayjs from "dayjs";
 import { swiper, insertSlides } from "./swiper";
 import User from "./User";
@@ -17,9 +17,11 @@ const totalExpenses = document.querySelector("#totalExpenses");
 const pastTrips = document.querySelector("#pastTrips");
 const upcomingTrips = document.querySelector("#upcomingTrips");
 const pendingTrips = document.querySelector("#pendingTrips");
+const previewTripButton = document.querySelector('#previewTrip')
 
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
+previewTripButton.addEventListener('click', previewTrip)
 
 let currentDate = dayjs().format("YYYY/MM/DD");
 let travelers; // need this?
@@ -132,3 +134,5 @@ function displayUserTrips() {
 
   // })
 }
+
+
