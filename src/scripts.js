@@ -59,7 +59,6 @@ function onLoadData(data) {
     )
   );
   user = new User(data[3]);
-  console.log(user);
   userTrips = trips.filterByQuery("userID", user.id);
 }
 
@@ -81,7 +80,6 @@ function updateSelectOptions(destinations) {
 }
 
 function updateStartCalendar(reset) {
-  console.log("update start calendar");
   const calendarDate = dayjs(currentDate).format("YYYY-MM-DD");
   if (!tripStartCalendar.value || reset) {
     tripStartCalendar.setAttribute("min", calendarDate);
@@ -95,11 +93,9 @@ function updateEndCalendar(reset) {
     dayjs(tripStartCalendar.value).isAfter(dayjs(tripEndCalendar.value)) ||
     reset
   ) {
-    console.log("set end");
     tripEndCalendar.value = tripStartCalendar.value;
     tripEndCalendar.setAttribute("min", tripStartCalendar.value);
   } else {
-    console.log("not here on update");
     tripEndCalendar.setAttribute("min", tripStartCalendar.value);
   }
 }
@@ -163,10 +159,10 @@ function previewTrip() {
   if (!validateForm()) return;
   const [startDate, endDate, destination, numTravelers, duration] =
     accessFormInputs();
-  console.log(destination);
-  console.log(startDate.format("YYYY/MM/DD"));
-  console.log(Math.abs(startDate.diff(dayjs(endDate), "day")));
-  console.log(numTravelers);
+  // console.log(destination);
+  // console.log(startDate.format("YYYY/MM/DD"));
+  // console.log(Math.abs(startDate.diff(dayjs(endDate), "day")));
+  // console.log(numTravelers);
 
   const postObject = {
     id: trips.trips.length + 1,
@@ -175,7 +171,7 @@ function previewTrip() {
     travelers: +numTravelers,
     date: startDate.format("YYYY/MM/DD"),
     duration: duration,
-    status: "pending",
+    status: "approved",
     suggestedActivities: [],
   };
 
@@ -186,7 +182,7 @@ function previewTrip() {
         throw new Error(`${res.status}: ${res.statusText}`);
       }
       // change fetch all argument to login page traveler id
-      fetchAll(2).then((data) => {
+      fetchAll(7).then((data) => {
         console.log(data);
         onLoadData(data);
         renderDOM();
@@ -198,7 +194,7 @@ function previewTrip() {
 }
 
 function clearInputs() {
-  console.log("clear inputs");
+  // console.log("clear inputs");
   numTravelersInput.value = "";
   updateStartCalendar(true);
   updateEndCalendar(true);
