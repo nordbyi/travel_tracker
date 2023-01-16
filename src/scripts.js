@@ -152,24 +152,20 @@ function displayUserTrips() {
 
 function previewTrip() {
   event.preventDefault();
-  //validate form
-  const destination = destinations.findByQuery(
-    "destination",
-    destinationInput.value
-  );
-  const startDate = dayjs(tripStartInput.value);
+  if(!validateForm()) return
+  const [startDate, endDate, destination, numTravelers, duration] = accessFormInputs()
   console.log(destination);
   console.log(startDate.format("YYYY/MM/DD"));
-  console.log(Math.abs(startDate.diff(dayjs(tripEndCalendar.value), "day")));
-  console.log(numTravelersInput.value);
+  console.log(Math.abs(startDate.diff(dayjs(endDate), "day")));
+  console.log(numTravelers);
 
   const postObject = {
     id: trips.trips.length + 1,
     userID: user.id,
     destinationID: destination.id,
-    travelers: +numTravelersInput.value,
+    travelers: +numTravelers,
     date: startDate.format("YYYY/MM/DD"),
-    duration: Math.abs(dayjs(tripEndCalendar.value).diff(startDate, "day")),
+    duration: duration,
     status: "pending",
     suggestedActivities: [],
   };
@@ -196,9 +192,41 @@ function clearInputs() {
   updateStartCalendar(true);
   updateEndCalendar(true);
 }
+
 function validateForm() {
   formErrorContainer.innerText = ''
-  [startDate, endDate, destination, numTravelers, duration] = accessFormInputs()
+  const [startDate, endDate, destination, numTravelers, duration] = accessFormInputs()
+  if(startDate.$d === 'Invalid Date {}' || endDate.$d === 'Invalid Date {}') {
+    displayFormError('Invalid Date Entered')
+    return false
+  }
+  
+  if(!startDate || !endDate || !destination || !numTravelers) {
+    displayFormError('Please complete all inputs')
+    return false
+  }
+
+  if(duration < 1) {
+    displayFormError('Trip Must Be At Least 1 Day Long')
+    return false
+  }
+
+  if(startDate.isAfter(endDate)) {
+    displayFormError('End Date Must Be After Start Date')
+    return false
+  }
+
+  if(startDate.isBefore(dayjs(), 'day')) {
+    displayFormError('Start Date Cannot Be In The Past')
+    return false
+  }
+
+  if(+numTravelers < 0) {
+    displayFormError('Number Of Travelers Cannot Be A Negative Number')
+    return false
+  }
+
+  return true
 }
 
 function accessFormInputs() {
