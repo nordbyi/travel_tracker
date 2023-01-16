@@ -36,16 +36,6 @@ class User {
     return +((flightCost + lodgingCost) * 1.1).toFixed()
   }
 
-  // calculateExpensesForYear(trips, currentDate, status, destinations) {
-  //   return trips.reduce((expenses, trip) => {
-  //     const dayObj = dayjs(currentDate)
-  //     if(trip.status === status && dayjs(trip.date).isBetween(dayObj.startOf('year'), dayObj.endOf('year'))) {
-  //       const tripDestination = destinations.findByQuery('id', trip.destinationID)
-  //       return expenses + this.calculateTripCost(trip, tripDestination)
-  //     }
-  //     return expenses
-  //   }, 0)
-  // }
   calculateExpensesForYear(trips, currentDate, destinations) {
     if(!trips || !currentDate || !destinations) return 'Please include trips array, currentDate, and destination class instance'
     return trips.reduce((expenses, trip) => {
