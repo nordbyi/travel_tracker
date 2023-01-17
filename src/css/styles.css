@@ -28,7 +28,15 @@ body {
 }
 
 .nav-element{
-  margin:1vw;
+  margin: .5vw;
+}
+
+.user-info {
+  font-size: 1.1rem;
+  background-color: darkturquoise;
+  border-radius: 4px;
+  color: black;
+  margin: 1vw;
 }
 
 .swiper {
@@ -126,6 +134,10 @@ h2 {
 .error{
   color:red;
   text-align: center;
+}
+
+.fetch-error {
+  font-size: 30px;
 }
 
 /* Micromodal styles */
