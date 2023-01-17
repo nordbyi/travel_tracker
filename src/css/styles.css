@@ -19,8 +19,18 @@ body {
 .nav {
   height: 12vh;
   width: 100%;
-  background-color: aquamarine;
+  background-color: rgb(6, 64, 150);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 25px;
 }
+
+.nav-element{
+  margin:1vw;
+}
+
 .swiper {
   width: 100%;
   padding-top: 50px;
@@ -42,7 +52,7 @@ body {
 
 .form {
   height: 10vh;
-  background-color: aquamarine;
+  background-color: darkturquoise;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,28 +78,33 @@ body {
   margin: 1vw;
 }
 
-.past-trips {
-  display: flex;
-}
-
-.upcoming-trips {
-  display: flex;
-}
-
+.past-trips,
+.upcoming-trips,
 .pending-trips {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .trip-display {
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  text-align: center;
   width: 150px;
   margin: 1%;
+  box-shadow: 5px 5px 5px rgb(171, 171, 171);
+  /* background-color: aquamarine; */
+  /* make black bottow, section with gradient blurring that section and image above, make text white and centered inside */
 }
 
 .trip-image {
   width: 150px;
   height: 175px;
+  /* -webkit-mask-image: linear-gradient(black, transparent);
+  mask-image: linear-gradient(black, transparent) */
 }
+
+/* .black-box {
+  background-color: #000;
+} */
 
 h2 {
   font-size: 25px;
@@ -108,7 +123,8 @@ h2 {
 
 /* Micromodal styles */
 .modal {
-  font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
 }
 
 .modal__overlay {
@@ -117,7 +133,7 @@ h2 {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,7 +141,7 @@ h2 {
 }
 
 .modal__container {
-  background-color: rgb(255, 255, 255) ;
+  background-color: rgb(255, 255, 255);
   padding: 30px;
   max-width: 500px;
   max-height: 100vh;
@@ -155,24 +171,26 @@ h2 {
   border: 0;
 }
 
-.modal__header .modal__close:before { content: "\2715"; }
+.modal__header .modal__close:before {
+  content: "\2715";
+}
 
 .modal__content {
   margin-top: 2rem;
   margin-bottom: 2rem;
   line-height: 1.5;
-  color: rgba(0,0,0,.8);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .btn {
-  font-size: .875rem;
+  font-size: 0.875rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   background-color: #e6e6e6;
-  color: rgba(0,0,0,.8);
-  border-radius: .25rem;
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 0.25rem;
   border-style: none;
   border-width: 0;
   cursor: pointer;
@@ -187,12 +205,13 @@ h2 {
   backface-visibility: hidden;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  transition: -webkit-transform .25s ease-out;
-  transition: transform .25s ease-out;
-  transition: transform .25s ease-out,-webkit-transform .25s ease-out;
+  transition: -webkit-transform 0.25s ease-out;
+  transition: transform 0.25s ease-out;
+  transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
 }
 
-.btn:focus, .btn:hover {
+.btn:focus,
+.btn:hover {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }
@@ -205,23 +224,39 @@ h2 {
 /* MicroModal Animation Style */
 
 @keyframes mmfadeIn {
-    from { opacity: 0; }
-      to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes mmfadeOut {
-    from { opacity: 1; }
-      to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes mmslideIn {
-  from { transform: translateY(15%); }
-    to { transform: translateY(0); }
+  from {
+    transform: translateY(15%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @keyframes mmslideOut {
-    from { transform: translateY(0); }
-    to { transform: translateY(-10%); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10%);
+  }
 }
 
 .micromodal-slide {
@@ -233,19 +268,19 @@ h2 {
 }
 
 .micromodal-slide[aria-hidden="false"] .modal__overlay {
-  animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+  animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .micromodal-slide[aria-hidden="false"] .modal__container {
-  animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+  animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .micromodal-slide[aria-hidden="true"] .modal__overlay {
-  animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+  animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .micromodal-slide[aria-hidden="true"] .modal__container {
-  animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
+  animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .micromodal-slide .modal__container,
