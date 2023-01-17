@@ -17,20 +17,15 @@
     <p class="error fetch-error" id="fetchError"></p>
     <main>
       <section class="swiper">
-        <!-- Additional required wrapper -->
         <div class="swiper-wrapper" id="swiperContainer">
           <!-- Slides -->
         </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination"></div>
-
-        <!-- If we need navigation buttons -->
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
       </section>
-      <form>
+      <form class="form">
         <label for="destinationsInput">Find A Destination: </label>
-        <select name="Destinations" id="destinationsInput">
+        <select class="input" name="Destinations" id="destinationsInput">
           <option value="test">Test</option>
         </select>
         <label for="tripStartInput">Start Date: </label>
@@ -44,40 +39,48 @@
           min="1"
           placeholder="Number of Travelers"
           id="numTravelersInput"
-          class="num-travelers-input"
+          class="input num-travelers-input"
         />
-        <button id="previewTrip">Preview Trip</button>
+        <button class="btn btn-primary" id="previewTrip">Preview Trip</button>
       </form>
       <p class="error form-error" id="formError"></p>
       <section>
-        <p>Past Trips</p>
+        <h2>Past Trips</h2>
         <div class="past-trips" id="pastTrips"></div>
-
-        <p>Upcoming Trips</p>
+        <h2>Upcoming Trips</h2>
         <div class="upcoming-trips" id="upcomingTrips"></div>
-
-        <p>Pending Trips</p>
+        <h2>Pending Trips</h2>
         <div class="pending-trips" id="pendingTrips"></div>
-
-        <!-- past, upcomming, and pending trips -->
       </section>
     </main>
-
-    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
     <div class="modal micromodal-slide" id="BookTrip" aria-hidden="true">
       <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="BookTrip-title">
+        <div
+          class="modal__container"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="BookTrip-title"
+        >
           <header class="modal__header">
-            <h2 class="modal__title" id="BookTrip-title">
-              Book Trip?!
-            </h2>
-            <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+            <h2 class="modal__title" id="BookTrip-title">Book Trip?!</h2>
+            <button
+              class="modal__close"
+              aria-label="Close modal"
+              data-micromodal-close
+            ></button>
           </header>
-          <main class="modal__content" id="bookTrip-content">
-          </main>
+          <main class="modal__content" id="bookTrip-content"></main>
           <footer class="modal__footer">
-            <button class="modal__btn modal__btn-primary" id="bookTripButton">Book Trip!</button>
-            <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+            <button class="btn btn-primary" id="bookTripButton">
+              Book Trip!
+            </button>
+            <button
+              class="btn"
+              data-micromodal-close
+              aria-label="Close this dialog window"
+            >
+              Close
+            </button>
           </footer>
         </div>
       </div>
