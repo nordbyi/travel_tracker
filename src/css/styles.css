@@ -3,17 +3,14 @@
 }
 
 body {
-  position: relative;
-  height: 100%;
-}
-
-body {
   background: #eee;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #000;
   margin: 0;
   padding: 0;
+  position: relative;
+  height: 100vh;
 }
 
 .nav {
@@ -94,27 +91,16 @@ body {
 }
 
 .trip-display {
-  /* border: 1px solid red; */
   text-align: center;
   width: 150px;
   margin: 1%;
   box-shadow: 5px 5px 5px rgb(171, 171, 171), inset 0 0 1px 2px darkturquoise;
-
-
-  /* background-color: aquamarine; */
-  /* make black bottow, section with gradient blurring that section and image above, make text white and centered inside */
 }
 
 .trip-image {
   width: 150px;
   height: 175px;
-  /* -webkit-mask-image: linear-gradient(black, transparent);
-  mask-image: linear-gradient(black, transparent) */
 }
-
-/* .trip-info-box{
-  box-shadow: inset 5px 5px 5px darkturquoise;
-} */
 
 h2 {
   font-size: 25px;
@@ -123,12 +109,34 @@ h2 {
 
 .preview-trip {
   height: 60vh;
-  /* width: 25vw; */
 }
 
 .preview-image {
   width: 300px;
   height: 350px;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  background-color: darkturquoise;
+  height: 28%;
+  width: 28%;
+  border-radius: 4px;
+}
+
+.login-title {
+  color: white;
+  font-size: 25px;
 }
 
 .error{
@@ -138,6 +146,10 @@ h2 {
 
 .fetch-error {
   font-size: 30px;
+}
+
+.hidden{
+  display: none;
 }
 
 /* Micromodal styles */
@@ -213,7 +225,6 @@ h2 {
   border-style: none;
   border-width: 0;
   cursor: pointer;
-  /* -webkit-appearance: button; */
   text-transform: none;
   overflow: visible;
   line-height: 1.15;
