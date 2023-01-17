@@ -8,7 +8,7 @@
     <title>Travel Tracker</title>
   </head>
   <body>
-    <section class="login">
+    <section class="login" id="login">
       <form class="form">
         <label for="username">Username</label>
         <input id="username">
@@ -17,7 +17,7 @@
         <button class="btn btn-primary" id="loginButton">Login</button>
       </form>
     </section>
-    <nav class="nav hidden">
+    <nav class="nav hidden" id="nav">
       <h1 class="nav-element">TRAVEL TRACKER</h1>
       <div class="user-info">
         <p class="user nav-element" id="username"></p>
@@ -25,7 +25,7 @@
       </div>
     </nav>
     <p class="error fetch-error" id="fetchError"></p>
-    <main class="hidden">
+    <main class="hidden" id="main">
       <section class="swiper">
         <div class="swiper-wrapper" id="swiperContainer">
           <!-- Slides -->
