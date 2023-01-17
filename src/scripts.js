@@ -38,6 +38,7 @@ const mainSwiper = document.querySelector("#swiperContainer")
 const usernameInput = document.querySelector('#usernameLogin')
 const passwordInput = document.querySelector('#password')
 const loginButton = document.querySelector('#loginButton')
+const loginErrorContainer = document.querySelector("#loginError")
 
 const loginSection = document.querySelector("#login")
 const navSection = document.querySelector("#nav")
@@ -75,7 +76,7 @@ fetchAll(7).then((data) => {
   console.log(data);
   onLoadData(data);
   renderDOM();
-}).catch(error => displayFetchError(error.message));
+}).catch(error => displayError(fetchErrorContainer, error.message));
 
 function onLoadData(data) {
   travelers = data[0].travelers; // need this?
@@ -205,10 +206,10 @@ function bookTrip() {
         onLoadData(data);
         renderDOM();
         clearInputs();
-      }).catch(error => displayFetchError(error.message));
+      }).catch(error => displayError(fetchErrorContainer, error.message));
       console.log(res);
     })
-    .catch((error) => displayFetchError(error));
+    .catch((error) => displayError(fetchErrorContainer, error));
 }
 
 function clearInputs() {
@@ -225,37 +226,37 @@ function validateForm() {
     console.log(destination)
 
   if (startDate.format('YYYY/MM/DD') === "Invalid Date") {
-    displayFormError("Invalid Start Date Entered");
+    displayError(formErrorContainer, "Invalid Start Date Entered");
     return false;
   }
 
   if(endDate.format('YYYY/MM/DD') === "Invalid Date"){
-    displayFormError("Invalid End Date Entered");
+    displayError(formErrorContainer, "Invalid End Date Entered");
     return false;
   }
 
   if (!startDate || !endDate || !destination || !numTravelers) {
-    displayFormError("Please complete all inputs");
+    displayError(formErrorContainer, "Please complete all inputs");
     return false;
   }
 
   if (startDate.isBefore(dayjs(), "day")) {
-    displayFormError("Start Date Cannot Be In The Past");
+    displayError(formErrorContainer, "Start Date Cannot Be In The Past");
     return false;
   }
 
   if (startDate.isAfter(endDate)) {
-    displayFormError("End Date Must Be After Start Date");
+    displayError(formErrorContainer, "End Date Must Be After Start Date");
     return false;
   }
 
   if (duration < 1) {
-    displayFormError("Trip Must Be At Least 1 Day Long");
+    displayError(formErrorContainer, "Trip Must Be At Least 1 Day Long");
     return false;
   }
 
   if (+numTravelers < 0) {
-    displayFormError("Number Of Travelers Cannot Be A Negative Number");
+    displayError(formErrorContainer, "Number Of Travelers Cannot Be A Negative Number");
     return false;
   }
 
@@ -276,12 +277,8 @@ function accessFormInputs() {
   return [startDate, endDate, destination, numTravelers, duration];
 }
 
-function displayFormError(message) {
-  formErrorContainer.innerText = message;
-}
-
-function displayFetchError(message) {
-  fetchErrorContainer.innerText = message;
+function displayError(container, message) {
+  container.innerText = message;
 }
 
 function createTripCard(trip, destination) {
@@ -330,7 +327,7 @@ function login() {
     console.log(data);
     onLoadData(data);
     renderDOM();
-  }).catch(error => displayFetchError(error.message));
+  }).catch(error => displayError(fetchErrorContainer, error.message));
 }
 
 function validateLogin() {
@@ -338,11 +335,11 @@ function validateLogin() {
   const password = passwordInput.value
   console.log(username.substring(0, 8))
   if(username.substring(0, 8) !== 'traveler' || +username.substring(8) < 1 || +username.substring(8) > 50) {
-    // add error message to login
+    displayError(loginErrorContainer, 'Incorrect UserName')
     return false
   }
   if(password !== 'traveler') {
-    // add error message to login
+    displayError(loginErrorContainer, 'Incorrect Password')
     return false
   }
 
