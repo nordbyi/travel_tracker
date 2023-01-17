@@ -338,7 +338,7 @@ function validateLogin() {
     displayError(loginErrorContainer, 'Incorrect UserName')
     return false
   }
-  if(password !== 'traveler') {
+  if(password !== 'travel') {
     displayError(loginErrorContainer, 'Incorrect Password')
     return false
   }
