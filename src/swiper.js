@@ -1,14 +1,12 @@
 import Swiper, {
   Navigation,
-  Pagination,
   EffectCoverflow,
   Autoplay,
 } from "swiper";
-const swiperSlideContainer = document.querySelector("#swiperContainer");
 
-const swiper = () =>
-  new Swiper(".swiper", {
-    modules: [EffectCoverflow, Navigation, Pagination, Autoplay],
+const swiper = (swiperID) =>
+  new Swiper(swiperID, {
+    modules: [EffectCoverflow, Navigation, Autoplay],
     effect: "coverflow",
     grabCursor: true,
     centeredSlides: true,
@@ -25,20 +23,17 @@ const swiper = () =>
     autoplay: {
       delay: 0,
     },
-    pagination: {
-      el: ".swiper-pagination",
-    },
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
     },
   });
 
-const insertSlides = (data) => {
-  swiperSlideContainer.innerHTML = "";
+const insertSlides = (data, swiperContainer, slideClass) => {
+  swiperContainer.innerHTML = "";
   data.forEach((el) => {
-    swiperSlideContainer.innerHTML += `<div class="swiper-slide">${`<img src="${el.image}" alt="${el.alt}"/>`}</div>`;
+    swiperContainer.innerHTML += `<div class="${slideClass}">${`<img src="${el.image}" alt="${el.alt}"/>`}</div>`;
   });
 };
 
-export { swiper, insertSlides };
+export { swiper, insertSlides};
