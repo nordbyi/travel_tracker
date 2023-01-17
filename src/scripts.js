@@ -39,6 +39,10 @@ const usernameInput = document.querySelector('#username')
 const passwordInput = document.querySelector('#password')
 const loginButton = documnet.querySelector('#loginButton')
 
+const loginSection = document.querySelector("#login")
+const navSection = document.querySelector("#nav")
+const mainSection = document.querySelector("#main")
+
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 previewTripButton.addEventListener("click", function() {
@@ -311,6 +315,9 @@ function previewTrip() {
   <article />`
 }
 
+function login() {
+  event.preventDefault()
 
+}
 
 
