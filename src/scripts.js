@@ -277,7 +277,7 @@ function createTripCard(trip, destination) {
   return `
     <article class="trip-display">
       <img class="trip-image" src="${destination.image}" alt="${destination.alt}">
-      <div class="black-box">
+      <div class="trip-info-box">
         <p class="trip-text" >${destination.destination}<p/>
         <p class="trip-start" >${trip.date}<p/>
         <p class="trip-duration" >${trip.duration} Days<p/>

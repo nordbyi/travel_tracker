@@ -90,7 +90,9 @@ body {
   text-align: center;
   width: 150px;
   margin: 1%;
-  box-shadow: 5px 5px 5px rgb(171, 171, 171);
+  box-shadow: 5px 5px 5px rgb(171, 171, 171), inset 0 0 1px 2px darkturquoise;
+
+
   /* background-color: aquamarine; */
   /* make black bottow, section with gradient blurring that section and image above, make text white and centered inside */
 }
@@ -102,8 +104,8 @@ body {
   mask-image: linear-gradient(black, transparent) */
 }
 
-/* .black-box {
-  background-color: #000;
+/* .trip-info-box{
+  box-shadow: inset 5px 5px 5px darkturquoise;
 } */
 
 h2 {
@@ -119,6 +121,11 @@ h2 {
 .preview-image {
   width: 300px;
   height: 350px;
+}
+
+.error{
+  color:red;
+  text-align: center;
 }
 
 /* Micromodal styles */
