@@ -32,6 +32,7 @@
   "dependencies": {
     "@glidejs/glide": "^3.6.0",
     "dayjs": "^1.11.7",
+    "micromodal": "^0.4.10",
     "swiper": "^8.4.5"
   }
 }

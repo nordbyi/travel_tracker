@@ -25,7 +25,7 @@ class User {
   }
 
   upcomingTrips(trips, date) {
-    return trips.filter(trip => dayjs(trip.date).isAfter(dayjs(date)) && trip.status === 'approved')
+    return trips.filter(trip => dayjs(trip.date).isAfter(dayjs(date).subtract(1, 'day')) && trip.status === 'approved')
   }
 
   calculateTripCost(trip, destination) {

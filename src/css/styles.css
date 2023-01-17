@@ -1,16 +1,7 @@
 * {
-  text-align: center;
+  margin: 0;
 }
 
-body {
-  background: radial-gradient(
-    circle,
-    rgba(63, 94, 251, 1) 0%,
-    rgba(252, 70, 107, 1) 100%
-  );
-}
-
-html,
 body {
   position: relative;
   height: 100%;
@@ -23,6 +14,21 @@ body {
   color: #000;
   margin: 0;
   padding: 0;
+}
+
+.nav {
+  height: 12vh;
+  width: 100%;
+  background-color: rgb(6, 64, 150);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 25px;
+}
+
+.nav-element{
+  margin:1vw;
 }
 
 .swiper {
@@ -44,25 +50,247 @@ body {
   height: 100%;
 }
 
-.past-trips {
+.form {
+  height: 10vh;
+  background-color: darkturquoise;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1vh;
 }
 
-.upcoming-trips {
-  display: flex;
+.options {
+  border: 1px solid #e5e5e5;
+  padding: 10px;
 }
 
+.input {
+  font-size: 14px;
+  border: none;
+  width: 18%;
+  height: 50%;
+  background: white;
+  margin: 1vw;
+}
+
+.date {
+  height: 50%;
+  margin: 1vw;
+}
+
+.past-trips,
+.upcoming-trips,
 .pending-trips {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .trip-display {
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  text-align: center;
   width: 150px;
+  margin: 1%;
+  box-shadow: 5px 5px 5px rgb(171, 171, 171), inset 0 0 1px 2px darkturquoise;
+
+
+  /* background-color: aquamarine; */
+  /* make black bottow, section with gradient blurring that section and image above, make text white and centered inside */
 }
 
 .trip-image {
   width: 150px;
   height: 175px;
+  /* -webkit-mask-image: linear-gradient(black, transparent);
+  mask-image: linear-gradient(black, transparent) */
 }
 
+/* .trip-info-box{
+  box-shadow: inset 5px 5px 5px darkturquoise;
+} */
+
+h2 {
+  font-size: 25px;
+  margin-left: 1%;
+}
+
+.preview-trip {
+  height: 60vh;
+  /* width: 25vw; */
+}
+
+.preview-image {
+  width: 300px;
+  height: 350px;
+}
+
+.error{
+  color:red;
+  text-align: center;
+}
+
+/* Micromodal styles */
+.modal {
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+}
+
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.modal__container {
+  background-color: rgb(255, 255, 255);
+  padding: 30px;
+  max-width: 500px;
+  max-height: 100vh;
+  border-radius: 4px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: #00449e;
+  box-sizing: border-box;
+}
+
+.modal__close {
+  background: transparent;
+  border: 0;
+}
+
+.modal__header .modal__close:before {
+  content: "\2715";
+}
+
+.modal__content {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.btn {
+  font-size: 0.875rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #e6e6e6;
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 0.25rem;
+  border-style: none;
+  border-width: 0;
+  cursor: pointer;
+  /* -webkit-appearance: button; */
+  text-transform: none;
+  overflow: visible;
+  line-height: 1.15;
+  margin: 0;
+  will-change: transform;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-transform 0.25s ease-out;
+  transition: transform 0.25s ease-out;
+  transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+}
+
+.btn:focus,
+.btn:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.btn-primary {
+  background-color: #00449e;
+  color: #fff;
+}
+
+/* MicroModal Animation Style */
+
+@keyframes mmfadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mmfadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mmslideIn {
+  from {
+    transform: translateY(15%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes mmslideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10%);
+  }
+}
+
+.micromodal-slide {
+  display: none;
+}
+
+.micromodal-slide.is-open {
+  display: block;
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__overlay {
+  animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__container {
+  animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__overlay {
+  animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__container {
+  animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide .modal__container,
+.micromodal-slide .modal__overlay {
+  will-change: transform;
+}
