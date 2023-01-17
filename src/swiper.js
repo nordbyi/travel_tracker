@@ -1,12 +1,11 @@
 import Swiper, {
-  Navigation,
   EffectCoverflow,
   Autoplay,
 } from "swiper";
 
 const swiper = (swiperID) =>
   new Swiper(swiperID, {
-    modules: [EffectCoverflow, Navigation, Autoplay],
+    modules: [EffectCoverflow, Autoplay],
     effect: "coverflow",
     grabCursor: true,
     centeredSlides: true,

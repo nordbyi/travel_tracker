@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import "./css/styles.css";
 import { fetchAll, postData } from "./apiCalls";
 import * as dayjs from "dayjs";
-import { swiper, insertSlides, userSwiper } from "./swiper";
+import { swiper, insertSlides} from "./swiper";
 import MicroModal from 'micromodal'
 import User from "./User";
 import Destinations from "./Destinations";
@@ -28,6 +28,7 @@ const previewTripButton = document.querySelector("#previewTrip");
 
 const formErrorContainer = document.querySelector("#formError");
 const fetchErrorContainer = document.querySelector("#fetchError");
+const loginErrorContainer = document.querySelector("#loginError")
 
 const modalContent = document.querySelector("#bookTrip-content")
 const modalBookButton = document.querySelector("#bookTripButton")
@@ -38,7 +39,6 @@ const mainSwiper = document.querySelector("#swiperContainer")
 const usernameInput = document.querySelector('#usernameLogin')
 const passwordInput = document.querySelector('#password')
 const loginButton = document.querySelector('#loginButton')
-const loginErrorContainer = document.querySelector("#loginError")
 
 const loginSection = document.querySelector("#login")
 const navSection = document.querySelector("#nav")
@@ -63,23 +63,12 @@ loginButton.addEventListener('click', function() {
 })
 
 let currentDate = dayjs().format("YYYY/MM/DD");
-let travelers; // need this?
 let trips;
 let destinations;
 let user;
 let userTrips;
 
-
-// change fetch all argument to login page traveler id
-// change fetchall parameter in post as well
-fetchAll(7).then((data) => {
-  console.log(data);
-  onLoadData(data);
-  renderDOM();
-}).catch(error => displayError(fetchErrorContainer, error.message));
-
 function onLoadData(data) {
-  travelers = data[0].travelers; // need this?
   trips = new Trips(data[1].trips.map(trip => {
     return {
       ...trip,
@@ -101,8 +90,6 @@ function renderDOM() {
   updateEndCalendar();
   insertSlides(destinations.destinations, mainSwiper, 'swiper-slide');
   swiper('.swiper');
-  // insertSlides(destinations.filterByQuery('id', userTrips.map(el => el.destinationID)), pastSwiper, 'swiper-slide');
-  // userSwiper('.past-swiper')
   displayTotalExpenses();
   displayUserTrips();
   usernameContainer.innerText = `Welcome ${user.name}`
@@ -151,38 +138,21 @@ function displayUserTrips() {
   pendingTrips.innerHTML = "";
   user.pastTrips(userTrips, currentDate).forEach((trip) => {
     const destination = destinations.findByQuery("id", trip.destinationID);
-    // console.log(destination)
-
     pastTrips.innerHTML += createTripCard(trip, destination);
   });
   user.upcomingTrips(userTrips, currentDate).forEach((trip) => {
     const destination = destinations.findByQuery("id", trip.destinationID);
-    // console.log(destination)
-
     upcomingTrips.innerHTML += createTripCard(trip, destination);
   });
   user.pendingTrips(userTrips).forEach((trip) => {
     const destination = destinations.findByQuery("id", trip.destinationID);
-    // console.log(destination)
-
     pendingTrips.innerHTML += createTripCard(trip, destination)
   });
-
-  // userTrips.forEach(trip => {
-  //   const destination = destinations.findByQuery('id', trip.destinationID)
-  //   console.log(destination)
-
-  // })
 }
 
 function bookTrip() {
   const [startDate, endDate, destination, numTravelers, duration] =
     accessFormInputs();
-  // console.log(destination);
-  // console.log(startDate.format("YYYY/MM/DD"));
-  // console.log(Math.abs(startDate.diff(dayjs(endDate), "day")));
-  // console.log(numTravelers);
-
   const postObject = {
     id: trips.trips.length + 1,
     userID: user.id,
@@ -194,26 +164,21 @@ function bookTrip() {
     suggestedActivities: [],
   };
 
-  console.log(postObject);
   postData(postObject)
     .then((res) => {
       if (!res.ok) {
         throw new Error(`${res.status}: ${res.statusText}`);
       }
-      // change fetch all argument to login page traveler id
       fetchAll(user.id).then((data) => {
-        console.log(data);
         onLoadData(data);
         renderDOM();
         clearInputs();
       }).catch(error => displayError(fetchErrorContainer, error.message));
-      console.log(res);
     })
     .catch((error) => displayError(fetchErrorContainer, error));
 }
 
 function clearInputs() {
-  // console.log("clear inputs");
   numTravelersInput.value = "";
   updateStartCalendar(true);
   updateEndCalendar(true);
@@ -223,8 +188,6 @@ function validateForm() {
   formErrorContainer.innerText = "";
   const [startDate, endDate, destination, numTravelers, duration] =
     accessFormInputs();
-    console.log(destination)
-
   if (startDate.format('YYYY/MM/DD') === "Invalid Date") {
     displayError(formErrorContainer, "Invalid Start Date Entered");
     return false;
@@ -322,9 +285,7 @@ function login() {
   loginSection.classList.add('hidden')
   navSection.classList.remove('hidden')
   mainSection.classList.remove('hidden')
-  // make fetch request with userID
   fetchAll(userID).then((data) => {
-    console.log(data);
     onLoadData(data);
     renderDOM();
   }).catch(error => displayError(fetchErrorContainer, error.message));
@@ -333,7 +294,6 @@ function login() {
 function validateLogin() {
   const username = usernameInput.value
   const password = passwordInput.value
-  console.log(username.substring(0, 8))
   if(username.substring(0, 8) !== 'traveler' || +username.substring(8) < 1 || +username.substring(8) > 50) {
     displayError(loginErrorContainer, 'Incorrect UserName')
     return false

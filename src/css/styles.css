@@ -91,27 +91,16 @@ body {
 }
 
 .trip-display {
-  /* border: 1px solid red; */
   text-align: center;
   width: 150px;
   margin: 1%;
   box-shadow: 5px 5px 5px rgb(171, 171, 171), inset 0 0 1px 2px darkturquoise;
-
-
-  /* background-color: aquamarine; */
-  /* make black bottow, section with gradient blurring that section and image above, make text white and centered inside */
 }
 
 .trip-image {
   width: 150px;
   height: 175px;
-  /* -webkit-mask-image: linear-gradient(black, transparent);
-  mask-image: linear-gradient(black, transparent) */
 }
-
-/* .trip-info-box{
-  box-shadow: inset 5px 5px 5px darkturquoise;
-} */
 
 h2 {
   font-size: 25px;
@@ -120,7 +109,6 @@ h2 {
 
 .preview-trip {
   height: 60vh;
-  /* width: 25vw; */
 }
 
 .preview-image {
@@ -237,7 +225,6 @@ h2 {
   border-style: none;
   border-width: 0;
   cursor: pointer;
-  /* -webkit-appearance: button; */
   text-transform: none;
   overflow: visible;
   line-height: 1.15;
