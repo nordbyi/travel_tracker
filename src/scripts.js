@@ -200,7 +200,7 @@ function bookTrip() {
         throw new Error(`${res.status}: ${res.statusText}`);
       }
       // change fetch all argument to login page traveler id
-      fetchAll(7).then((data) => {
+      fetchAll(user.id).then((data) => {
         console.log(data);
         onLoadData(data);
         renderDOM();
@@ -326,7 +326,7 @@ function login() {
   navSection.classList.remove('hidden')
   mainSection.classList.remove('hidden')
   // make fetch request with userID
-  fetchAll(7).then((data) => {
+  fetchAll(userID).then((data) => {
     console.log(data);
     onLoadData(data);
     renderDOM();
