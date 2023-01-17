@@ -9,10 +9,11 @@
   </head>
   <body>
     <nav class="nav">
-      <p>Logo</p>
-      <p class="total-expenses" id="totalExpenses">
-        Amount Spent on trips + Agent fees
-      </p>
+      <p class="nav-element">TRAVEL TRACKER</p>
+      <div>
+        <p class="user nav-element" id="username"></p>
+        <p class="total-expenses nav-element" id="totalExpenses"></p>
+      </div>
     </nav>
     <p class="error fetch-error" id="fetchError"></p>
     <main>
@@ -62,7 +63,7 @@
           aria-labelledby="BookTrip-title"
         >
           <header class="modal__header">
-            <h2 class="modal__title" id="BookTrip-title">Book Trip?!</h2>
+            <h2 class="modal__title" id="BookTripTitle">Book Trip?!</h2>
             <button
               class="modal__close"
               aria-label="Close modal"
