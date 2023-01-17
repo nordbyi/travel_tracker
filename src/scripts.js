@@ -319,7 +319,9 @@ function previewTrip() {
   <article />`
 }
 
-function login(userID) {
+function login() {
+  const userID = validateLogin()
+  if(!userID) return
   loginSection.classList.add('hidden')
   navSection.classList.remove('hidden')
   mainSection.classList.remove('hidden')
@@ -331,5 +333,20 @@ function login(userID) {
   }).catch(error => displayFetchError(error.message));
 }
 
+function validateLogin() {
+  const username = usernameInput.value
+  const password = passwordInput.value
+  console.log(username.substring(0, 8))
+  if(username.substring(0, 8) !== 'traveler' || +username.substring(8) < 1 || +username.substring(8) > 50) {
+    // add error message to login
+    return false
+  }
+  if(password !== 'traveler') {
+    // add error message to login
+    return false
+  }
+
+  return +username.substring(8)
+}
 
 
