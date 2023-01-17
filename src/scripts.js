@@ -35,9 +35,9 @@ const modalTitle = document.querySelector("#BookTripTitle")
 
 const mainSwiper = document.querySelector("#swiperContainer")
 
-const usernameInput = document.querySelector('#username')
+const usernameInput = document.querySelector('#usernameLogin')
 const passwordInput = document.querySelector('#password')
-const loginButton = documnet.querySelector('#loginButton')
+const loginButton = document.querySelector('#loginButton')
 
 const loginSection = document.querySelector("#login")
 const navSection = document.querySelector("#nav")
@@ -51,11 +51,15 @@ previewTripButton.addEventListener("click", function() {
   modalContent.innerHTML = previewTrip()
   MicroModal.show('BookTrip');
 });
-modalBookButton.addEventListener('click', function() {
+modalBookButton.addEventListener('click', function(event) {
   bookTrip()
   MicroModal.close()
 })
-loginButton.addEventListener('click', login)
+loginButton.addEventListener('click', function() {
+  event.preventDefault()
+  login()
+  
+})
 
 let currentDate = dayjs().format("YYYY/MM/DD");
 let travelers; // need this?
@@ -315,9 +319,17 @@ function previewTrip() {
   <article />`
 }
 
-function login() {
-  event.preventDefault()
-
+function login(userID) {
+  loginSection.classList.add('hidden')
+  navSection.classList.remove('hidden')
+  mainSection.classList.remove('hidden')
+  // make fetch request with userID
+  fetchAll(7).then((data) => {
+    console.log(data);
+    onLoadData(data);
+    renderDOM();
+  }).catch(error => displayFetchError(error.message));
 }
+
 
 
