@@ -5,12 +5,13 @@ import "swiper/css/pagination";
 import "./css/styles.css";
 import { fetchAll, postData } from "./apiCalls";
 import * as dayjs from "dayjs";
-import { swiper, insertSlides } from "./swiper";
+import { swiper, insertSlides, userSwiper } from "./swiper";
 import MicroModal from 'micromodal'
 import User from "./User";
 import Destinations from "./Destinations";
 import Trips from "./Trips";
 
+const usernameContainer = document.querySelector("#username")
 const selectInput = document.querySelector("#destinationsInput");
 const tripStartCalendar = document.querySelector("#tripStartInput");
 const tripEndCalendar = document.querySelector("#tripEndInput");
@@ -30,6 +31,10 @@ const fetchErrorContainer = document.querySelector("#fetchError");
 
 const modalContent = document.querySelector("#bookTrip-content")
 const modalBookButton = document.querySelector("#bookTripButton")
+const modalTitle = document.querySelector("#BookTripTitle")
+
+const mainSwiper = document.querySelector("#swiperContainer")
+// const pastSwiper = document.querySelector("#PastSwiperContainer")
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 previewTripButton.addEventListener("click", function() {
@@ -82,10 +87,13 @@ function renderDOM() {
   updateSelectOptions(destinations);
   updateStartCalendar();
   updateEndCalendar();
-  insertSlides(destinations.destinations);
-  swiper();
+  insertSlides(destinations.destinations, mainSwiper, 'swiper-slide');
+  swiper('.swiper');
+  // insertSlides(destinations.filterByQuery('id', userTrips.map(el => el.destinationID)), pastSwiper, 'swiper-slide');
+  // userSwiper('.past-swiper')
   displayTotalExpenses();
   displayUserTrips();
+  usernameContainer.innerText = `Welcome ${user.name}`
 }
 
 function updateSelectOptions(destinations) {
@@ -107,7 +115,7 @@ function updateEndCalendar(reset) {
   if (
     !tripEndCalendar.value ||
     dayjs(tripStartCalendar.value).isAfter(dayjs(tripEndCalendar.value)) ||
-    reset
+    reset === true
   ) {
     tripEndCalendar.value = tripStartCalendar.value;
     tripEndCalendar.setAttribute("min", tripStartCalendar.value);
@@ -122,7 +130,7 @@ function displayTotalExpenses() {
     currentDate,
     destinations
   );
-  totalExpenses.innerText = `This Year's Expenditures: Approved: $${totals.approved} Pending: $${totals.pending}`;
+  totalExpenses.innerText = `Year's Expenses: $${(totals.approved + totals.pending).toLocaleString()}`;
 }
 
 function displayUserTrips() {
@@ -269,10 +277,12 @@ function createTripCard(trip, destination) {
   return `
     <article class="trip-display">
       <img class="trip-image" src="${destination.image}" alt="${destination.alt}">
-      <p class="trip-text" >${destination.destination}<p/>
-      <p class="trip-start" >${trip.date}<p/>
-      <p class="trip-duration" >${trip.duration} Days<p/>
-      <p class="trip-cost" >$${user.calculateTripCost(trip, destination)}<p/>
+      <div class="black-box">
+        <p class="trip-text" >${destination.destination}<p/>
+        <p class="trip-start" >${trip.date}<p/>
+        <p class="trip-duration" >${trip.duration} Days<p/>
+        <p class="trip-cost" >$${user.calculateTripCost(trip, destination).toLocaleString()}<p/>
+      <div />
     <article />`;
 }
 
@@ -285,14 +295,15 @@ function previewTrip() {
     duration: duration,
     destinationID: destination.id
   }
+  modalTitle.innerText = `You're Off To ${destination.destination}!`
   return `
   <article class="preview-trip">
     <img class="preview-image" src="${destination.image}" alt="${destination.alt}">
     <div>
-      <p class="trip-text" >${destination.destination}<p/>
-      <p class="trip-start" >${trip.date}<p/>
-      <p class="trip-duration" >${trip.duration} Days<p/>
-      <p class="trip-cost" >$${user.calculateTripCost(trip, destination)}<p/>
+      <p class="trip-text" >Destination: ${destination.destination}<p/>
+      <p class="trip-start" >Leave Date: ${trip.date}<p/>
+      <p class="trip-duration" >Duration: ${trip.duration} Days<p/>
+      <p class="trip-cost" >Cost: $${user.calculateTripCost(trip, destination).toLocaleString()}<p/>
       <div/>
   <article />`
 }
