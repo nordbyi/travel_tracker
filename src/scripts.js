@@ -34,21 +34,24 @@ const modalBookButton = document.querySelector("#bookTripButton")
 const modalTitle = document.querySelector("#BookTripTitle")
 
 const mainSwiper = document.querySelector("#swiperContainer")
-// const pastSwiper = document.querySelector("#PastSwiperContainer")
+
+const usernameInput = document.querySelector('#username')
+const passwordInput = document.querySelector('#password')
+const loginButton = documnet.querySelector('#loginButton')
+
 
 tripStartCalendar.addEventListener("change", updateEndCalendar);
 previewTripButton.addEventListener("click", function() {
   event.preventDefault()
   if (!validateForm()) return;
-  modalContent.innerHTML = previewTrip() // make function to preview a trip and destination based on inputs
+  modalContent.innerHTML = previewTrip()
   MicroModal.show('BookTrip');
 });
 modalBookButton.addEventListener('click', function() {
   bookTrip()
   MicroModal.close()
 })
-
-// set up button in micromodal to call bookTrip (rename previewtrip function to booktrip)
+loginButton.addEventListener('click', login)
 
 let currentDate = dayjs().format("YYYY/MM/DD");
 let travelers; // need this?
@@ -307,3 +310,7 @@ function previewTrip() {
       <div/>
   <article />`
 }
+
+
+
+
