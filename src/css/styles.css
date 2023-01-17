@@ -128,6 +128,10 @@ h2 {
   text-align: center;
 }
 
+.fetch-error {
+  font-size: 30px;
+}
+
 /* Micromodal styles */
 .modal {
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
