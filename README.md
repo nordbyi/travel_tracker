@@ -42,6 +42,10 @@
 
 Travel Tracker is an app that allows a user to plan example trips. You can see all of a user's past, upcoming, and pending trips. You can use the form to select a destination, start and end date, numer of travlers, recieve a quote for the trips cost, and book the trip. This project demonstrates OOP, working with APIs (fetch GET and POST with a local server), error handling, Test Driven Design using Mocha and Chai (with sad path testing), Accessibility, and implementation of external libraries such as dayjs, minimodaljs, and swiperjs. The app is fully tabbable and Lighthouse accessibility audit is 100%. I created this Travel Tracker app as part of my final solo project for the second quarter at Turing School of Software and Design. I completed this project from the ground up in 4 days.
 
+![ABECCE8A-FB56-4F6E-8A3F-04E9EF954D5F_1_105_c](https://user-images.githubusercontent.com/82419988/235490686-6b7f4894-d3f0-4e92-9ee8-482090d53d39.jpeg)
+![D3F0A19E-0E29-4E2A-A2B0-BC64E5C0F51F_1_105_c](https://user-images.githubusercontent.com/82419988/235490899-6f7241f5-ff1b-4f8c-a300-4c79129b89c0.jpeg)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
